@@ -2,10 +2,10 @@
 Final version of the Remote Learning subject program. It takes a `.mol2` file from the `/inputs` directory as input and generates 3 output files in the `/results` directory:
 
 - **.out1**: Prints energy contribution of each bond, angle and dihedral. Also prints the gradient in cartesian coordinates and the contribution of each set of internals to the gradient.
-- **.out2**: Log of the optimization in cartesian coordinates using the BGFS Quasi-Neowton optimization algorithm.
-- **.out3**: Log of the optimization in internal coordinates using the BGFS Quasi-Neowton optimization algorithm. 
+- **.out2**: Log of the optimization in cartesian coordinates using the BGFS Quasi-Newton optimization algorithm.
+- **.out3**: Log of the optimization in internal coordinates using the BGFS Quasi-Newton optimization algorithm. 
 
-# Excution
+# Execution
 The program can be executed from the terminal as:
 ```bash
 python3 geom_optimizer.py inputs/filename.mol2
