@@ -998,12 +998,29 @@ def calculate_internal_matrices(
 
 
 def BFGS_optimization(
-    r_k: Vector, grad_0: Matrix, thresh=0.00100000
+    r_k: Matrix, grad_0: Matrix, thresh: float = 0.001
 ) -> [Matrix, float]:
-    """Performs the optimization in cartesian coordinates setting a threshold
-    of rms deviation. Returns the energy and the coordinates when a stationary
-    point has been found."""
+    """Perform the optimization in cartesian coordinates.
 
+    It sets a threshold of rms deviation. Returns the energy and the coordinates
+    when a stationary point has been found.
+
+
+    Parameters
+    ----------
+    r_k : Matrix
+        Atomic positions in 2D.
+    grad_0 : Matrix
+        Gradient in 2D of the initial structure.
+    thresh : float, optional
+        Threshold of RMS for convergence in the optimization. The default is 0.001.
+
+    Returns
+    -------
+    [Matrix, float]
+        Returns atomic positions at the stationary point in 2D and the energy.
+
+    """
     print_section_title("CARTESIAN BFGS OPTIMIZATION")
     print("RMSD THRESHOLD IS: %.5f" % thresh)
 
@@ -1029,7 +1046,7 @@ def BFGS_optimization(
                 print(line)
 
         p_k = (-hessian @ grad_0[-1].reshape(-1)).reshape(
-            [N_ATOMS, 3]
+            [-1, 3]
         )  # reshaped to have a "per atom" dimension
 
         print("\nThe predicted change p_k is:")
@@ -1081,13 +1098,37 @@ def BFGS_optimization(
     return r_k, final_energy
 
 
-def line_search(r_k, p_k, grad_0) -> [Vector, Matrix, float]:
-    """Performs line search to scale the displacement in the cartesian
-    optimization"""
+def line_search(
+    r_k: Matrix, p_k: Matrix, grad_0: Matrix, alpha: float = 0.8
+) -> [Matrix, Vector, float]:
+    """
+    Perform line search to scale the displacement in the cartesian optimization.
 
+    When a search direction is obtained, a check is made to determine if the
+    scale of the vector is appropriate. It is considered appropriate when the
+    Wolfe conditions are met. If they are not met, the vector of the search
+    direction is scaled until the condition is met.
+
+    Parameters
+    ----------
+    r_k : Matrix
+        Atomic positions in 2D.
+    p_k : Matrix
+        Search direction in 2D.
+    grad_0 : Matrix
+        Gradient of the energy in cartesian coordinates for this step.
+    alpha : float, optional
+        Starting value of Alpha for the line search. The default is 0.8.
+
+    Returns
+    -------
+    [Matrix, Vector, float]
+        Returns the new atomic positions in 2D, the displacement in 1D and the
+        energy at the point where the Wolfe condition is met.
+
+    """
     print("\nA line search has been started:")
 
-    alpha = 0.8
     wolfe_is_met = False
     energy_minus_one = calculate_potential_from_coords(r_k)
 
@@ -1128,14 +1169,36 @@ def line_search(r_k, p_k, grad_0) -> [Vector, Matrix, float]:
 def internal_BFGS_optimization(
     atom_coord_2d: Matrix,
     r_vector_matrix: Matrix,
-    thresh=0.00001,
-    rms_thresh=0.02,
-    grms_thresh=0.001,
+    thresh: float = 0.00001,
+    rms_thresh: float = 0.02,
+    grms_thresh: float = 0.001,
 ) -> [Matrix, float]:
-    """Performs the optimization in internal coordinates setting a threshold
-    of rms deviation. Returns the energy and the coordinates when a stationary
-    point has been found."""
+    """
+    Perform the optimization in internal coordinates.
 
+    For this the steps shown in the notes are followed. When the grms value is
+    lower than a certain threshold, the optimization is considered converged.
+    Returns the energy and the coordinates when a stationary point has been found.
+
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    thresh : float, optional
+        Threshold for the conversion from internal to cartesian coordinates. The default is 0.00001.
+    rms_thresh : float, optional
+        Thresholf for the rescaling of the gradient in internal coordinates. The default is 0.02.
+    grms_thresh : float, optional
+        Threshold for the optimization in internal coordinates. The default is 0.001.
+
+    Returns
+    -------
+    [Matrix, float]
+        Returns the stationary point cartesian coordinates in 2D and the total energy at the stationary point.
+
+    """
     print_section_title("BFGS optimization in internal coordinates")
     x_0 = atom_coord_2d
     hessian = initialize_hessian(atom_coord_2d)
@@ -1145,7 +1208,6 @@ def internal_BFGS_optimization(
     grad_iter = 0
     grms = 2 * grms_thresh
     while grms > grms_thresh:
-        #    for i in range(1):
         # 0 calculate/update the hessian
         grad_iter += 1
 
@@ -1292,8 +1354,7 @@ def internal_BFGS_optimization(
 
 def initialize_hessian(atom_coord_2d: Matrix) -> Matrix:
     """
-    Initialize the hessian for internal coordinates optimization with the
-    selected values depending on the type of internal coordinate
+    Initialize the hessian for internal coordinates optimization with the selected values depending on the type of internal coordinate.
 
     Parameters
     ----------
@@ -1306,7 +1367,6 @@ def initialize_hessian(atom_coord_2d: Matrix) -> Matrix:
         Returns the hessian matrix.
 
     """
-
     hessian = np.zeros(
         [len(INTERNAL_COORDINATE_TYPES), len(INTERNAL_COORDINATE_TYPES)]
     )
@@ -1321,9 +1381,29 @@ def initialize_hessian(atom_coord_2d: Matrix) -> Matrix:
     return hessian
 
 
-def update_hessian(hessian_0: Matrix, s_q: Vector, y_q: Vector, v_q: Vector):
-    """Returns the updated hessian using the formula"""
+def update_hessian(
+    hessian_0: Matrix, s_q: Vector, y_q: Vector, v_q: Vector
+) -> Matrix:
+    """
+    Return the updated hessian using the updated Hessian formula.
 
+    Parameters
+    ----------
+    hessian_0 : Matrix
+        Hessian matrix in the previous step.
+    s_q : Vector
+        S_q vector.
+    y_q : Vector
+        Y_q vector.
+    v_q : Vector
+        V_q vector.
+
+    Returns
+    -------
+    Matrix
+        Updated Hessian.
+
+    """
     a = np.outer((s_q @ y_q + y_q @ v_q) * s_q, s_q) / (s_q @ y_q) ** 2
     b = (np.outer(v_q, s_q) + np.outer(s_q, v_q)) / (s_q @ y_q)
 
@@ -1338,11 +1418,32 @@ def internal_to_cartesian(
     s_q: Vector,
     x_0: Vector,
     q_1: Vector,
-    thresh=0.00001,
+    thresh: float = 0.00001,
 ) -> [Vector, Vector]:
-    """Transforms from internal coordinates to cartesian coordinates via an
-    iterative procedure"""
+    """Transform from internal coordinates to cartesian coordinates via an iterative procedure.
 
+    Parameters
+    ----------
+    b_matrix : Matrix
+        Wilson B matrix.
+    g_inverse : Matrix
+        Generalized inverse of B.
+    s_q : Vector
+        Difference between internals and desired internals in vector form.
+    x_0 : Vector
+        Cartesian coordinates in cartesian form of the previous step.
+    q_1 : Vector
+        Desired internal coordinates in vector form.
+    thresh : float, optional
+        Threshold value for the convergence of the conversion from internal to cartesian coordinates.
+        The default is 0.00001.
+
+    Returns
+    -------
+    [Vector, Vector]
+        Returns the new cartesian coordinates x_1 and the new set of internals q_11 in vector form.
+
+    """
     max_change = 1
     cartesian_step = 0
     while max_change > thresh:
