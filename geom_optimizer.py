@@ -1893,11 +1893,10 @@ def main(filename: str):
 
 
 default_filename = os.getcwd() + "/inputs/methane.mol2"
-path = os.getcwd()
 
 if __name__ == "__main__":
     # add the possibility to input the filename from the terminal.
-    path = os.getcwd()
+
     try:
         filename = sys.argv[1]
     except IndexError:
