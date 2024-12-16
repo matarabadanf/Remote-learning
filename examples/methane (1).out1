@@ -1,0 +1,68 @@
+The input file has: 5 atoms
+Atoms and coordinates (in Å):
+C     -0.012700      1.085800      0.008000
+H      0.202100     -0.004100      0.102000
+H      1.009900      1.463100      0.200300
+H     -0.589900      1.496900     -0.875100
+H     -0.522900      1.437300      0.904800
+Number of coordinates:
+Stretching:      4 Bending:      6 Torsion:      0
+Internal:     10 Cartesian:     15 
+Potential energy at input structure:
+    5.106778 kcal/mol
+Stretch, Bend, Torsion, VDW components of potential energy:
+    0.325222     4.781556     0.000000     0.000000
+List of all bonds: (At1 - At2, with labels, and distance in Angstrom, energy contrib in kcal/mol)
+C   1   -   H   2:      1.11483       0.00818
+C   1   -   H   3:      1.10682       0.00354
+C   1   -   H   4:      1.13227       0.17354
+C   1   -   H   5:      1.09000       0.13996
+List of all bending angles: (At1 - At2 - At3, with labels, angle in radian then degrees, energy contribution)
+H   2   -   C   1   -   H   3:     1.711863     98.083        1.38983
+H   2   -   C   1   -   H   4:     2.116405    121.261        1.47475
+H   2   -   C   1   -   H   5:     1.913545    109.638        0.00020
+H   3   -   C   1   -   H   4:     2.074559    118.864        0.93476
+H   3   -   C   1   -   H   5:     1.751359    100.345        0.89350
+H   4   -   C   1   -   H   5:     1.860847    106.619        0.08851
+List of all torsional angles: (At1 - At2 - At3 - At4, with labels, angle in radian then degrees,  energy contrib in kcal/mol)
+List of all unique atom pairs: (At1 - At2, with labels, distance,  vdW energy contrib in kcal/mol)
+C   1   -   H   2:      1.11483       0.00000
+C   1   -   H   3:      1.10682       0.00000
+C   1   -   H   4:      1.13227       0.00000
+C   1   -   H   5:      1.09000       0.00000
+H   2   -   H   3:      1.67776       0.00000
+H   2   -   H   4:      1.95831       0.00000
+H   2   -   H   5:      1.80215       0.00000
+H   3   -   H   4:      1.92795       0.00000
+H   3   -   H   5:      1.68715       0.00000
+H   4   -   H   5:      1.78216       0.00000
+Analytical gradient of overall energy: (in kcal/mol/Å)
+C    -15.057782     -0.686047    -18.404729
+H     18.914138      1.438184     13.594353
+H     -0.302982    -14.879537     17.983837
+H    -16.690351     12.804442     -3.115153
+H     13.136976      1.322959    -10.058308
+Analytical gradient of stretching energy:
+C      2.799811      2.922900     23.775302
+H      0.652104     -3.308792      0.285372
+H     -2.058135     -0.759373     -0.387032
+H     -7.945808      5.659255    -12.156866
+H      6.552028     -4.513990    -11.516775
+Analytical gradient of bending energy:
+C    -17.857593     -3.608948    -42.180031
+H     18.262034      4.746976     13.308982
+H      1.755153    -14.120165     18.370870
+H     -8.744543      7.145187      9.041713
+H      6.584948      5.836949      1.458467
+Analytical gradient of torsional energy:
+C      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+Analytical gradient of VDW energy:
+C      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
+H      0.000000      0.000000      0.000000
