@@ -1404,8 +1404,21 @@ def internal_to_cartesian(
 
 
 def print_section_title(title: str, width=80):
-    """Print header to separate sections"""
+    """
+    Print header to separate sections.
 
+    Parameters
+    ----------
+    title : str
+        Section title.
+    width : TYPE, optional
+        Select witdth of the section title. The default is 80.
+
+    Returns
+    -------
+    None.
+
+    """
     print("\n\n")
     print("#" * width)
     plus = 0
@@ -1427,8 +1440,21 @@ def print_section_title(title: str, width=80):
 
 
 def print_atom_information(atom_coord_2d: Matrix, lab=False):
-    """Print atom information including the labels and cartesian coordinates."""
+    """
+    Print atom information including the labels and cartesian coordinates.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Atomic coordinates in matrix form.
+    lab : list[str], optional
+        Labels that will be displayed with each position vector. The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
     if lab is False:
         lab = EXT_LAB
 
@@ -1437,18 +1463,40 @@ def print_atom_information(atom_coord_2d: Matrix, lab=False):
         print("{:<3} {:9.6f} {:9.6f} {:9.6f}".format(lab[i], x, y, z))
 
 
-def print_CONNECTIVITY_MATRIX():
-    """For printing purposes. Uses pandas because it has nice printing."""
+def print_CONNECTIVITY_MATRIX() -> None:
+    """
+    For printing purposes. Uses the constant CONNECTIVITY_MATRIX and prints it.
 
+    Works with pandas because it has nice printing.
+
+    Returns
+    -------
+    None.
+
+    """
     df = pd.DataFrame(
         CONNECTIVITY_MATRIX, columns=EXT_LAB, index=EXT_LAB
     ).astype(int)
     print(df)
 
 
-def print_bond_information(dist_mat: Matrix, potential=False):
-    """Print bond information with the current distance matrix and bond list."""
+def print_bond_information(dist_mat: Matrix, potential=False) -> None:
+    """
+    Print bond information with the current distance matrix and bond list.
 
+    Parameters
+    ----------
+    dist_mat : Matrix
+    potential : np.nandarray, optional
+        Variable used to modify the output. If a list containing the potential
+        energy of each contribution is fed to the function, it will be printed.
+        The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
     print("\nBond information:\n")
     for index, _ in enumerate(BOND_LIST):
         i, j = BOND_LIST[index]
@@ -1480,9 +1528,24 @@ def print_bond_information(dist_mat: Matrix, potential=False):
         print("\nTotal number of bonds %i" % len(BOND_LIST))
 
 
-def print_angles_information(angle_values: Vector, potential=False):
-    """Prints angle information"""
+def print_angles_information(angle_values: Vector, potential=False) -> None:
+    """
+    Print angle information in a pretty format
 
+    Parameters
+    ----------
+    angle_values : Vector
+        Vector that contains the floating point values of the different angles.
+    potential : np.nandarray, optional
+        Variable used to modify the output. If a list containing the potential
+        energy of each contribution is fed to the function, it will be printed.
+        The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
     print("\nAngle information:\n")
     for angle, _ in enumerate(ANGLE_LIST):
         i, j, k = ANGLE_LIST[angle]
@@ -1512,9 +1575,24 @@ def print_angles_information(angle_values: Vector, potential=False):
         print("\nTotal number of angles %i" % len(ANGLE_LIST))
 
 
-def print_dihedrals_information(dih_val: Vector, potential=False):
-    """Prints angle information"""
+def print_dihedrals_information(dih_val: Vector, potential=False) -> None:
+    """
+    Print angle information in a pretty format.
 
+    Parameters
+    ----------
+    dih_val : Vector
+        Vector that contains the floating point values of the different dihedrals.
+    potential : np.nandarray, optional
+        Variable used to modify the output. If a list containing the potential
+        energy of each contribution is fed to the function, it will be printed.
+        The default is False.
+
+    Returns
+    -------
+    None.
+
+    """
     print("\nDihedral information:\n")
     for dihedral, _ in enumerate(DIHEDRAL_LIST):
         i, j, k, l = DIHEDRAL_LIST[dihedral]
@@ -1527,6 +1605,7 @@ def print_dihedrals_information(dih_val: Vector, potential=False):
                     potential[dihedral],
                 )
             )
+
         else:
             print(
                 "Dihedral {:>3}: {:^16} {:8.2f} deg".format(
@@ -1535,6 +1614,7 @@ def print_dihedrals_information(dih_val: Vector, potential=False):
                     dih_val[dihedral],
                 )
             )
+
     if isinstance(potential, np.ndarray):
         print(
             "\nTotal number of dihedrals %i. Total energy contribution : %.4f kcal · mol^-1"
@@ -1546,9 +1626,24 @@ def print_dihedrals_information(dih_val: Vector, potential=False):
 
 def print_vdw_pairs(
     vdw_potential_matrix: Matrix, dist_mat: Matrix, vdw_potential: float
-):
-    """Prints all VdW pairs"""
+) -> None:
+    """
+    Print all VdW pairs in a pretty format.
 
+    Parameters
+    ----------
+    vdw_potential_matrix : Matrix
+        Matrix containing the VdW potential between pairs of atoms.
+    dist_mat : Matrix
+        Distance matrix between atoms.
+    vdw_potential : float
+        Total VdW potential.
+
+    Returns
+    -------
+    None.
+
+    """
     counter = 0
     print("\nVdW repulsion information:\n")
     print("             Atoms     Distance             Energy")
@@ -1575,9 +1670,28 @@ def print_gradient_contribution(
     dihedral_gradient: Matrix,
     vdw_gradient: Matrix,
     long=True,
-):
-    """Prints all stretching contributions to the gradient"""
+) -> None:
+    """
+    Print all stretching contributions to the gradient.
 
+    Parameters
+    ----------
+    stretching_gradient : Matrix
+        2D representation of the contribution of bonds to the gradient in cartesian coordinates.
+    angle_gradient : Matrix
+        2D representation of the contribution of angles to the gradient in cartesian coordinates.
+    dihedral_gradient : Matrix
+        2D representation of the contribution of dihedrals to the gradient in cartesian coordinates.
+    vdw_gradient : Matrix
+        2D representation of the contribution of VdW repulsion to the gradient in cartesian coordinates.
+    long : bool, optional
+        Large verbose ammount. The default is True.
+
+    Returns
+    -------
+    None.
+
+    """
     if long:
         print("\nAnalitical gradient of stretching energy:")
         for i, label in enumerate(EXT_LAB):
@@ -1610,10 +1724,26 @@ def print_gradient_contribution(
 
 
 def calculate_and_print_energy(
-    dist_mat: Matrix, r_vector_matrix: Matrix, long=True
-):
-    """Calculates the total potential energy and prints it in a pretty format"""
+    dist_mat: Matrix, r_vector_matrix: Matrix, long: bool = True
+) -> float:
+    """
+    Calculate the total potential energy and prints it in a pretty format.
 
+    Parameters
+    ----------
+    dist_mat : Matrix
+        Distance matrix between atoms.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    long : bool, optional
+       Large verbose ammount. The default is True.
+
+    Returns
+    -------
+    total_potential : float
+        Total potential energy.
+
+    """
     angle_values = calculate_angles(r_vector_matrix, dist_mat)
     dih_val = calculate_dihedrals(r_vector_matrix)
 
@@ -1657,9 +1787,26 @@ def calculate_and_print_gradient(
     r_vector_matrix: Matrix,
     dist_mat: Matrix,
     long=True,
-):
-    """Calculates the gradient energy and prints it in a pretty format"""
+) -> None:
+    """
+    Calculate the gradient energy and prints it in a pretty format.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Atomic coordinates in matrix form.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    dist_mat : Matrix
+        Distance matrix between atoms.
+    long : bool, optional
+       Large verbose ammount. The default is True.
+
+    Returns
+    -------
+    None.
+
+    """
     gradients = calculate_gradient(atom_coord_2d, r_vector_matrix, dist_mat)
 
     print_gradient_contribution(*gradients[0:4], long)
@@ -1671,9 +1818,28 @@ def print_internal_matrices(
     Lambda: Vector,
     g_inverse: Matrix,
     cartesian_grad: Matrix,
-):
-    """Calculates B, G and g Inverse and prints it in a pretty format"""
+) -> None:
+    """
+    Calculate B, G and G Inverse and prints it in a pretty format.
 
+    Parameters
+    ----------
+    b_matrix : Matrix
+        Wilson B matrix.
+    g_matrix : Matrix
+        G matrix .
+    Lambda : Vector
+        List of eigenvalues of the G matrix.
+    g_inverse : Matrix
+        Generalized inverse of B.
+    cartesian_grad : Matrix
+        Total gradient in cartesian coordinates.
+
+    Returns
+    -------
+    None.
+
+    """
     print(
         "\nThe Wilson B matrix at this structure is (%i rows %i columns):\n"
         % (len(b_matrix), len(b_matrix[0]))
@@ -1719,17 +1885,15 @@ def regular_format(mol2_file: str) -> bool:
         True if there are separators. False othewise.
 
     """
-
     f = read_mol2_file(mol2_file)
     return "@" in f[0]
 
 
 def startup(mol2_file: str) -> list[int, list[str], Vector, Matrix]:
     """
-    Extracts the basic information contained in the mol2 file.
+    Extract the basic information contained in the mol2 file.
     The unconventional mol2 file calls the function that reads the
     contents of a mol2 file without @<> separators.
-
 
     Parameters
     ----------
@@ -1741,7 +1905,6 @@ def startup(mol2_file: str) -> list[int, list[str], Vector, Matrix]:
     list
         Returns a list that contains [number_of_atoms, ATOM_LABELS, atom_coord_2d, CONNECTIVITY_MATRIX].
     """
-
     if regular_format(mol2_file):
         global N_ATOMS
         content_list = read_mol2_file(mol2_file)
@@ -1764,8 +1927,7 @@ def startup(mol2_file: str) -> list[int, list[str], Vector, Matrix]:
 
 def define_constants(mol2_file: str):
     """
-    Defines all the constants of the system, such as number of atoms,
-    internal coordinate types, bonds...
+    Define all the constants of the system, such as number of atoms, internal coordinate types, bonds...
 
     Parameters
     ----------
@@ -1777,7 +1939,6 @@ def define_constants(mol2_file: str):
     None, but modifies the global scope setting the value of the constants.
 
     """
-
     global N_ATOMS, ATOM_LABELS, CONNECTIVITY_MATRIX, EXT_LAB, BOND_LIST, ANGLE_LIST
     global DIHEDRAL_LIST, UN, BOND_TYPES, ANGLE_TYPES, INTERNAL_COORDINATE_MEMEBERS, INTERNAL_COORDINATE_TYPES
 
@@ -1814,7 +1975,6 @@ def mol1_report(mol2_file: str):
     None.
 
     """
-
     with open(
         mol2_file.replace(".mol2", "").replace("inputs/", "results/")
         + "_matis.out1",
@@ -1848,7 +2008,7 @@ def mol1_report(mol2_file: str):
 
 def mol2_report(mol2_file: str):
     """
-    Generates the report that includes the optimization in cartesian coordinates
+    Generate the report that includes the optimization in cartesian coordinates.
 
     Parameters
     ----------
@@ -1860,7 +2020,6 @@ def mol2_report(mol2_file: str):
     None.
 
     """
-
     with open(
         mol2_file.replace(".mol2", "").replace("inputs/", "results/")
         + "_matis.out2",
@@ -1891,7 +2050,7 @@ def mol2_report(mol2_file: str):
 
 def mol3_report(mol2_file: str):
     """
-    Generates the report that includes the optimization in internal coordinates
+    Generate the report that includes the optimization in internal coordinates.
 
     Parameters
     ----------
@@ -1903,7 +2062,6 @@ def mol3_report(mol2_file: str):
     None.
 
     """
-
     with open(
         mol2_file.replace(".mol2", "").replace("inputs/", "results/")
         + "_matis.out3",
@@ -1941,7 +2099,7 @@ def mol3_report(mol2_file: str):
 
 def main(filename: str):
     """
-    Main function that calls to each individual report.
+    Call required functions for to each individual report.
 
     Parameters
     ----------
@@ -1954,7 +2112,6 @@ def main(filename: str):
     None.
 
     """
-
     define_constants(filename)
 
     a = time.perf_counter()
