@@ -8,7 +8,7 @@ Final version of the Remote Learning subject program. It takes a `.mol2` file fr
 # Excution
 The program can be executed from the terminal as:
 ```bash
-python3 geom_optimizer.py inputs/filename.mol3
+python3 geom_optimizer.py inputs/filename.mol2
 ```
 Or by modifying in the script file the variable `default_filename`:
 ```python3
