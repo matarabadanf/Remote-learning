@@ -651,8 +651,22 @@ def calculate_potential_from_coords(atom_coord_2d: Matrix) -> float:
 def bond_derivative(
     bond_indexes: list[int, int], r_vector_matrix: Matrix
 ) -> Vector:
-    """Returns the derivative dr_ab/dx"""
+    """
+    Calculate the derivative dr_ab/dx.
 
+    Parameters
+    ----------
+    bond_indexes : list[int, int]
+        List with the atomic indices of the atoms involved in the bond.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+
+    Returns
+    -------
+    Vector
+        Returns a vector with the components of the angle derivative.
+
+    """
     r_ba = r_vector_matrix[bond_indexes[0]][bond_indexes[1]]
     return r_ba / np.linalg.norm(r_ba)
 
@@ -660,8 +674,22 @@ def bond_derivative(
 def angle_derivative(
     angle: list[int, int, int], r_vector_matrix: Matrix
 ) -> list[Vector]:
-    """Returns the derivative dtheta_abc/dx"""
+    """
+    Calculate the derivative dtheta_abc/dx.
 
+    Parameters
+    ----------
+    angle : list[int, int, int]
+        List with the atomic indices of the atoms involved in the angle.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+
+    Returns
+    -------
+    list[Vector]
+        Returns a list of the 3 vectorial components of the angle derivative.
+
+    """
     d_angle = np.zeros([3, 3])
 
     A, B, C = angle
@@ -688,8 +716,22 @@ def angle_derivative(
 def dihedral_derivative(
     dihedral: list[int, int, int, int], r_vector_matrix: Matrix
 ) -> Vector:
-    """Returns the derivative dphi_abcd/dx"""
+    """
+    Calculate the derivative dphi_abcd/dx.
 
+    Parameters
+    ----------
+    dihedral : list[int, int, int, int]
+        List with the atomic indices of the atoms involved in the dihedral.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+
+    Returns
+    -------
+    Vector
+        Returns a list of the 3 vectorial components of the dihedral derivative.
+
+    """
     d_dihed = np.zeros([4, 3])
     A, B, C, D = dihedral
 
@@ -743,8 +785,22 @@ def dihedral_derivative(
 def analytical_stretching_gradient(
     r_vector_matrix: Matrix, dist_mat: Matrix
 ) -> Matrix:
-    """Computes the stretching gradient analytically"""
+    """
+    Compute the stretching gradient analytically.
 
+    Parameters
+    ----------
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    dist_mat : Matrix
+        Distance matrix between atoms.
+
+    Returns
+    -------
+    Matrix
+        2D gradient contribution of the bonds.
+
+    """
     stretching_gradient = np.zeros([len(dist_mat), 3])
 
     for index, bond in enumerate(BOND_LIST):
@@ -765,8 +821,22 @@ def analytical_stretching_gradient(
 def analytical_bending_gradient(
     r_vector_matrix: Matrix, angle_values: Vector
 ) -> Matrix:
-    """Computes the bending gradient analytically"""
+    """
+    Compute the bending gradient analytically.
 
+    Parameters
+    ----------
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    angle_values : Vector
+        Vector containing the values of the angles.
+
+    Returns
+    -------
+    Matrix
+        2D gradient contribution of the angles.
+
+    """
     angle_gradient = np.zeros([len(r_vector_matrix), 3])
 
     for index, angle in enumerate(ANGLE_LIST):
@@ -792,8 +862,24 @@ def analytical_bending_gradient(
 def analytical_dihedral_gradient(
     dist_mat: Matrix, r_vector_matrix: Matrix, dihedral_values: Vector
 ) -> Matrix:
-    """Computes the dihedral gradient anallytically"""
+    """
+    Compute the dihedral gradient anallytically.
 
+    Parameters
+    ----------
+    dist_mat : Matrix
+        Distance matrix between atoms.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    dihedral_values : Vector
+        Vector containing the values of the dihedral angles.
+
+    Returns
+    -------
+    Matrix
+        2D gradient contribution of the dihedral angles.
+
+    """
     dihedral_gradient = np.zeros([len(dist_mat), 3])
 
     for index, dihedral in enumerate(DIHEDRAL_LIST):
@@ -815,8 +901,22 @@ def analytical_dihedral_gradient(
 
 
 def analytical_vdw_gradient(atom_coord_2d: Matrix, dist_mat: Matrix) -> Matrix:
-    """Computes the WdW gradient"""
+    """
+    Compute the WdW gradient using the provided formula.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+    dist_mat : Matrix
+        Distance matrix between atoms.
+
+    Returns
+    -------
+    Matrix
+        VdW gradient in cartesian coordinates.
+
+    """
     vdw_gradient = np.zeros([N_ATOMS, 3])
 
     for i in range(N_ATOMS):
@@ -851,8 +951,24 @@ def analytical_vdw_gradient(atom_coord_2d: Matrix, dist_mat: Matrix) -> Matrix:
 def calculate_gradient(
     atom_coord_2d: Matrix, r_vector_matrix: Matrix, dist_mat: Matrix
 ) -> list[Matrix]:
-    """Computes all gradient components and returns the total gradient"""
+    """
+    Compute all gradient components and returns the total gradient.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    dist_mat : Matrix
+        Distance matrix between atoms.
+
+    Returns
+    -------
+    list[Matrix]
+        Returns a list with all the contributions to the gradient and total gradient in 2D..
+
+    """
     angle_values = calculate_angles(r_vector_matrix, dist_mat)
     dih_val = calculate_dihedrals(r_vector_matrix)
 
@@ -880,13 +996,24 @@ def calculate_gradient(
         total_gradient,
     ]
 
-    return gradients
-    # we will pack here the values to make the return more simple and will eventually unpack them:
+    return gradients  # we will pack here the values and eventually unpack them
 
 
 def calculate_gradient_from_cartesian(r_k: Vector) -> list[Matrix]:
-    """Auxliary function for readability in the internal optimization"""
+    """
+    Auxliary function for readability in the internal optimization.
 
+    Parameters
+    ----------
+    r_k : Vector
+        Atomic positions in 2D.
+
+    Returns
+    -------
+    list[Matrix]
+        Returns a list with all the contributions to the gradient and total gradient in 2D.
+
+    """
     r_vector_matrix = calculate_r_vector_matrix(r_k)
     dist_mat = calculate_dist_mat(r_vector_matrix)
 
@@ -895,27 +1022,39 @@ def calculate_gradient_from_cartesian(r_k: Vector) -> list[Matrix]:
 
 ################################################################################
 #                                                                              #
-#                     Calculating Wilson B & co                                #
+#                           Calculating Wilson                                 #
 #                                                                              #
 ################################################################################
 
 
 def calculate_b_matrix(
-    internal_COORDINATE_TYPEs: list[int],
-    internal_coordinate_members: list[int],
     atom_coord_2d: Matrix,
     r_vector_matrix: Matrix,
 ) -> Matrix:
-    """Calculates the wilson B matrix. It is a 3*natom by n_internal matrix"""
+    """
+    Calculate the wilson B matrix. It is a 3*natom by n_internal matrix.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+
+    Returns
+    -------
+    Matrix
+        Returns Wilson B matrix.
+
+    """
     atom_coord_1d = np.copy(atom_coord_2d)
     atom_coord_1d = atom_coord_2d.reshape([3 * len(r_vector_matrix)])
 
-    b_matrix = np.zeros([len(internal_COORDINATE_TYPEs), len(atom_coord_1d)])
+    b_matrix = np.zeros([len(INTERNAL_COORDINATE_TYPES), len(atom_coord_1d)])
 
-    for i, internal in enumerate(internal_COORDINATE_TYPEs):
+    for i, internal in enumerate(INTERNAL_COORDINATE_TYPES):
         if internal in [0, 1]:
-            A, B = internal_coordinate_members[i]
+            A, B = INTERNAL_COORDINATE_MEMEBERS[i]
 
             d_bond = bond_derivative([A, B], r_vector_matrix)
 
@@ -923,7 +1062,7 @@ def calculate_b_matrix(
             b_matrix[i][3 * B : 3 * (B + 1)] = -d_bond
 
         elif internal in [2, 3, 4]:
-            A, B, C = internal_coordinate_members[i]
+            A, B, C = INTERNAL_COORDINATE_MEMEBERS[i]
 
             d_ang = angle_derivative([A, B, C], r_vector_matrix)
 
@@ -932,7 +1071,7 @@ def calculate_b_matrix(
             b_matrix[i][3 * C : 3 * C + 3] = d_ang[2]
 
         elif internal == 99:
-            A, B, C, D = internal_coordinate_members[i]
+            A, B, C, D = INTERNAL_COORDINATE_MEMEBERS[i]
 
             d_dih = dihedral_derivative([A, B, C, D], r_vector_matrix)
 
@@ -951,9 +1090,20 @@ def calculate_g_matrix(b_matrix: Matrix) -> Matrix:
 
 
 def calculate_g_inverse(g_matrix: Matrix) -> [Vector, Matrix]:
-    """Calculates the eigenvalues of the G matrix and returns the
-    generalized inverse of the B matrix"""
+    """
+    Calculate the eigenvalues of the G matrix and returns the generalized inverse of the B matrix.
 
+    Parameters
+    ----------
+    g_matrix : Matrix
+        G matrix.
+
+    Returns
+    -------
+    [Vector, Matrix]
+        Returns the eigenvalues of the G matrix and the inverse of G.
+
+    """
     Lambda, V = np.linalg.eig(g_matrix)
 
     Lambda = np.real(Lambda)
@@ -972,11 +1122,23 @@ def calculate_g_inverse(g_matrix: Matrix) -> [Vector, Matrix]:
 def calculate_internal_matrices(
     atom_coord_2d: Matrix, r_vector_matrix: Matrix
 ) -> [Matrix, Matrix, Vector, Matrix]:
-    """Calculates the matrices related to the internal optimization"""
+    """
+    Calculate the matrices related to the internal optimization.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+
+    Returns
+    -------
+    [Matrix, Matrix, Vector, Matrix]
+        Returns the B matrix, G matrix, eigenvalues of G as a vector, and G inverse matrix.
+
+    """
     b_matrix = calculate_b_matrix(
-        INTERNAL_COORDINATE_TYPES,
-        INTERNAL_COORDINATE_MEMEBERS,
         atom_coord_2d,
         r_vector_matrix,
     )
@@ -1201,7 +1363,7 @@ def internal_BFGS_optimization(
     """
     print_section_title("BFGS optimization in internal coordinates")
     x_0 = atom_coord_2d
-    hessian = initialize_hessian(atom_coord_2d)
+    hessian = initialize_hessian()
     print("The estimated Hessian for the first step is:\n")
     print(hessian)
 
@@ -1352,14 +1514,9 @@ def internal_BFGS_optimization(
     return x_0, final_energy
 
 
-def initialize_hessian(atom_coord_2d: Matrix) -> Matrix:
+def initialize_hessian() -> Matrix:
     """
     Initialize the hessian for internal coordinates optimization with the selected values depending on the type of internal coordinate.
-
-    Parameters
-    ----------
-    atom_coord_2d : Matrix
-        Matrix with the atom positions.
 
     Returns
     -------
@@ -1631,7 +1788,7 @@ def print_bond_information(dist_mat: Matrix, potential=False) -> None:
 
 def print_angles_information(angle_values: Vector, potential=False) -> None:
     """
-    Print angle information in a pretty format
+    Print angle information in a pretty format.
 
     Parameters
     ----------
@@ -1928,7 +2085,7 @@ def print_internal_matrices(
     b_matrix : Matrix
         Wilson B matrix.
     g_matrix : Matrix
-        G matrix .
+        G matrix.
     Lambda : Vector
         List of eigenvalues of the G matrix.
     g_inverse : Matrix
@@ -1993,6 +2150,7 @@ def regular_format(mol2_file: str) -> bool:
 def startup(mol2_file: str) -> list[int, list[str], Vector, Matrix]:
     """
     Extract the basic information contained in the mol2 file.
+
     The unconventional mol2 file calls the function that reads the
     contents of a mol2 file without @<> separators.
 
