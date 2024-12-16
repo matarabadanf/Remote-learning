@@ -1,0 +1,142 @@
+
+
+
+################################################################################
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#                             Geometry input section                           #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+
+There are 5 atoms in inputs/methane.mol2 file
+C1  -0.012700  1.085800  0.008000
+H1   0.202100 -0.004100  0.102000
+H2   1.009900  1.463100  0.200300
+H3  -0.589900  1.496900 -0.875100
+H4  -0.522900  1.437300  0.904800
+
+The connectivity matrix of the inputs/methane.mol2 file is
+    C1  H1  H2  H3  H4
+C1   0   1   1   1   1
+H1   1   0   0   0   0
+H2   1   0   0   0   0
+H3   1   0   0   0   0
+H4   1   0   0   0   0
+
+
+
+################################################################################
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#                               Energy calculation                             #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+
+
+Each internal coordinate and their contribution to the energy are:
+
+Bond information:
+
+Bond   1: C1 H1    1.1148 A    0.00818 kcal mol^-1
+Bond   2: C1 H2    1.1068 A    0.00354 kcal mol^-1
+Bond   3: C1 H3    1.1323 A    0.17354 kcal mol^-1
+Bond   4: C1 H4    1.0900 A    0.13996 kcal mol^-1
+
+Total number of bonds 4. Total energy contribution : 0.3252 kcal · mol^-1
+
+Angle information:
+
+Angle   1: H1 C1 H2         98.08 deg    1.38983 kcal mol^-1
+Angle   2: H1 C1 H3        121.26 deg    1.47475 kcal mol^-1
+Angle   3: H1 C1 H4        109.64 deg    0.00020 kcal mol^-1
+Angle   4: H2 C1 H3        118.86 deg    0.93476 kcal mol^-1
+Angle   5: H2 C1 H4        100.35 deg    0.89350 kcal mol^-1
+Angle   6: H3 C1 H4        106.62 deg    0.08851 kcal mol^-1
+
+Total number of angles 6. Total energy contribution : 4.7816 kcal · mol^-1
+
+Dihedral information:
+
+
+Total number of dihedrals 0. Total energy contribution : 0.0000 kcal · mol^-1
+
+VdW repulsion information:
+
+             Atoms     Distance             Energy
+Pair 1  : C1 H1        1.1148 A          0.00000 kcal mol^-1
+Pair 2  : C1 H2        1.1068 A          0.00000 kcal mol^-1
+Pair 3  : C1 H3        1.1323 A          0.00000 kcal mol^-1
+Pair 4  : C1 H4        1.0900 A          0.00000 kcal mol^-1
+Pair 5  : H1 H2        1.6778 A          0.00000 kcal mol^-1
+Pair 6  : H1 H3        1.9583 A          0.00000 kcal mol^-1
+Pair 7  : H1 H4        1.8022 A          0.00000 kcal mol^-1
+Pair 8  : H2 H3        1.9279 A          0.00000 kcal mol^-1
+Pair 9  : H2 H4        1.6871 A          0.00000 kcal mol^-1
+Pair 10 : H3 H4        1.7822 A          0.00000 kcal mol^-1
+
+Total number of unique atom pairss: 10. Total energy: 0.0000 kcal mol^-1.
+
+Energy contribution per type is:
+Str: 0.3252 kcal · mol^-1
+Ben: 4.7816 kcal · mol^-1
+Dih: 0.0000 kcal · mol^-1
+VdW: 0.0000 kcal · mol^-1
+
+:: TOTAL ENERGY = 5.10677804 kcal · mol^-1
+
+
+
+################################################################################
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#                              Gradient calculation                            #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+
+
+Analitical gradient of stretching energy:
+C1     2.7998    2.9229   23.7753
+H1     0.6521   -3.3088    0.2854
+H2    -2.0581   -0.7594   -0.3870
+H3    -7.9458    5.6593  -12.1569
+H4     6.5520   -4.5140  -11.5168
+
+Analitical gradient of bending energy:
+C1   -17.8576   -3.6089  -42.1800
+H1    18.2620    4.7470   13.3090
+H2     1.7552  -14.1202   18.3709
+H3    -8.7445    7.1452    9.0417
+H4     6.5849    5.8369    1.4585
+
+Analitical gradient of torsional energy:
+C1     0.0000    0.0000    0.0000
+H1     0.0000    0.0000    0.0000
+H2     0.0000    0.0000    0.0000
+H3     0.0000    0.0000    0.0000
+H4     0.0000    0.0000    0.0000
+
+Analitical gradient of VdW energy:
+C1     0.0000    0.0000    0.0000
+H1     0.0000    0.0000    0.0000
+H2     0.0000    0.0000    0.0000
+H3     0.0000    0.0000    0.0000
+H4     0.0000    0.0000    0.0000
+
+Analitical gradient of overall energy:
+C1   -15.0578   -0.6860  -18.4047
+H1    18.9141    1.4382   13.5944
+H2    -0.3030  -14.8795   17.9838
+H3   -16.6904   12.8044   -3.1152
+H4    13.1370    1.3230  -10.0583

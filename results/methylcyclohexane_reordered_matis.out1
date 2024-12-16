@@ -1,0 +1,570 @@
+
+
+
+################################################################################
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#                             Geometry input section                           #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+
+There are 21 atoms in inputs/methylcyclohexane_reordered.mol2 file
+C1  -1.035600  0.000000 -0.326000
+C2  -0.321400  1.263700  0.172400
+C3  -0.321500 -1.263600  0.172300
+C4   1.157900  1.261500 -0.206300
+C5   1.157800 -1.261600 -0.206200
+C6   1.862200  0.000000  0.283100
+C7  -2.499500  0.000000  0.110600
+H1  -1.011400  0.000000 -1.424000
+H2  -0.414000  1.339200  1.863500
+H3  -0.800900  2.155200 -0.249200
+H4  -0.801000 -2.155100 -0.249300
+H5  -0.414200 -1.339200  1.263400
+H6   1.648000  2.145100  0.217800
+H7   1.255300  1.334500 -1.296500
+H8   1.255300 -1.334800 -1.296400
+H9   1.647800 -2.145200  0.218100
+H10  2.901800 -0.000100 -0.063200
+H11  1.890400  0.000000  1.379700
+H12 -3.018600  0.885000 -0.272300
+H13 -3.018800 -0.884800 -0.272300
+H14 -2.590000  0.000000  1.202100
+
+The connectivity matrix of the inputs/methylcyclohexane_reordered.mol2 file is
+     C1  C2  C3  C4  C5  C6  C7  H1  H2  H3  H4  H5  H6  H7  H8  H9  H10  H11  H12  H13  H14
+C1    0   1   1   0   0   0   1   1   0   0   0   0   0   0   0   0    0    0    0    0    0
+C2    1   0   0   1   0   0   0   0   1   1   0   0   0   0   0   0    0    0    0    0    0
+C3    1   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0    0    0    0    0    0
+C4    0   1   0   0   0   1   0   0   0   0   0   0   1   1   0   0    0    0    0    0    0
+C5    0   0   1   0   0   1   0   0   0   0   0   0   0   0   1   1    0    0    0    0    0
+C6    0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0    1    1    0    0    0
+C7    1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0    0    0    1    1    1
+H1    1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H2    0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H3    0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H4    0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H5    0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H6    0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H7    0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H8    0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H9    0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H10   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H11   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H12   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H13   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+H14   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0    0    0    0    0    0
+
+
+
+################################################################################
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#                               Energy calculation                             #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+
+
+Each internal coordinate and their contribution to the energy are:
+
+Bond information:
+
+Bond   1: C1 C2    1.5347 A    0.00674 kcal mol^-1
+Bond   2: C1 C3    1.5346 A    0.00628 kcal mol^-1
+Bond   3: C1 C7    1.5276 A    0.00170 kcal mol^-1
+Bond   4: C1 H1    1.0983 A    0.04819 kcal mol^-1
+Bond   5: C2 C4    1.5270 A    0.00269 kcal mol^-1
+Bond   6: C2 H2    1.6953 A  119.90793 kcal mol^-1
+Bond   7: C2 H3    1.0966 A    0.06324 kcal mol^-1
+Bond   8: C3 C5    1.5270 A    0.00278 kcal mol^-1
+Bond   9: C3 H4    1.0966 A    0.06324 kcal mol^-1
+Bond  10: C3 H5    1.0976 A    0.05349 kcal mol^-1
+Bond  11: C4 C6    1.5254 A    0.00627 kcal mol^-1
+Bond  12: C4 H6    1.0958 A    0.07044 kcal mol^-1
+Bond  13: C4 H7    1.0970 A    0.05939 kcal mol^-1
+Bond  14: C5 C6    1.5255 A    0.00601 kcal mol^-1
+Bond  15: C5 H8    1.0970 A    0.05919 kcal mol^-1
+Bond  16: C5 H9    1.0958 A    0.07011 kcal mol^-1
+Bond  17: C6 H10   1.0958 A    0.07096 kcal mol^-1
+Bond  18: C6 H11   1.0970 A    0.05949 kcal mol^-1
+Bond  19: C7 H12   1.0951 A    0.07743 kcal mol^-1
+Bond  20: C7 H13   1.0951 A    0.07812 kcal mol^-1
+Bond  21: C7 H14   1.0952 A    0.07619 kcal mol^-1
+
+Total number of bonds 21. Total energy contribution : 120.7899 kcal · mol^-1
+
+Angle information:
+
+Angle   1: C2 C1 C3        110.85 deg    0.03355 kcal mol^-1
+Angle   2: C2 C1 C7        110.68 deg    0.02540 kcal mol^-1
+Angle   3: C2 C1 H1        108.33 deg    0.01471 kcal mol^-1
+Angle   4: C3 C1 C7        110.68 deg    0.02539 kcal mol^-1
+Angle   5: C3 C1 H1        108.32 deg    0.01476 kcal mol^-1
+Angle   6: C4 C2 C1        111.66 deg    0.08525 kcal mol^-1
+Angle   7: C4 C2 H2        107.48 deg    0.04353 kcal mol^-1
+Angle   8: C4 C2 H3        109.23 deg    0.00075 kcal mol^-1
+Angle   9: C4 C6 C5        111.58 deg    0.07915 kcal mol^-1
+Angle  10: C5 C3 C1        111.67 deg    0.08601 kcal mol^-1
+Angle  11: C5 C3 H4        109.23 deg    0.00077 kcal mol^-1
+Angle  12: C5 C3 H5        109.17 deg    0.00119 kcal mol^-1
+Angle  13: C6 C4 C2        111.65 deg    0.08435 kcal mol^-1
+Angle  14: C6 C4 H6        109.64 deg    0.00022 kcal mol^-1
+Angle  15: C6 C4 H7        109.44 deg    0.00003 kcal mol^-1
+Angle  16: C6 C5 C3        111.65 deg    0.08436 kcal mol^-1
+Angle  17: C6 C5 H8        109.44 deg    0.00003 kcal mol^-1
+Angle  18: C6 C5 H9        109.64 deg    0.00022 kcal mol^-1
+Angle  19: C7 C1 H1        107.87 deg    0.02834 kcal mol^-1
+Angle  20: H2 C2 C1        109.58 deg    0.00008 kcal mol^-1
+Angle  21: H2 C2 H3        108.87 deg    0.00423 kcal mol^-1
+Angle  22: H3 C2 C1        109.94 deg    0.00209 kcal mol^-1
+Angle  23: H4 C3 C1        109.94 deg    0.00211 kcal mol^-1
+Angle  24: H4 C3 H5        106.81 deg    0.07694 kcal mol^-1
+Angle  25: H5 C3 C1        109.89 deg    0.00161 kcal mol^-1
+Angle  26: H6 C4 C2        109.64 deg    0.00021 kcal mol^-1
+Angle  27: H6 C4 H7        106.93 deg    0.07024 kcal mol^-1
+Angle  28: H7 C4 C2        109.41 deg    0.00008 kcal mol^-1
+Angle  29: H8 C5 C3        109.41 deg    0.00008 kcal mol^-1
+Angle  30: H8 C5 H9        106.93 deg    0.07028 kcal mol^-1
+Angle  31: H9 C5 C3        109.64 deg    0.00022 kcal mol^-1
+Angle  32: H10 C6 C4       109.68 deg    0.00034 kcal mol^-1
+Angle  33: H10 C6 C5       109.67 deg    0.00032 kcal mol^-1
+Angle  34: H10 C6 H11      106.95 deg    0.06931 kcal mol^-1
+Angle  35: H11 C6 C4       109.43 deg    0.00006 kcal mol^-1
+Angle  36: H11 C6 C5       109.42 deg    0.00007 kcal mol^-1
+Angle  37: H12 C7 C1       110.75 deg    0.01669 kcal mol^-1
+Angle  38: H12 C7 H13      107.81 deg    0.03033 kcal mol^-1
+Angle  39: H12 C7 H14      108.02 deg    0.02349 kcal mol^-1
+Angle  40: H13 C7 C1       110.76 deg    0.01701 kcal mol^-1
+Angle  41: H13 C7 H14      108.02 deg    0.02348 kcal mol^-1
+Angle  42: H14 C7 C1       111.35 deg    0.03636 kcal mol^-1
+
+Total number of angles 42. Total energy contribution : 1.0536 kcal · mol^-1
+
+Dihedral information:
+
+Dihedral   1:   C1 C2 C4 C6       54.79 deg    0.01109 kcal mol^-1
+Dihedral   2:   C1 C2 C4 H6      176.51 deg    0.00501 kcal mol^-1
+Dihedral   3:   C1 C2 C4 H7      -66.52 deg    0.01729 kcal mol^-1
+Dihedral   4:   C1 C3 C5 C6      -54.78 deg    0.01114 kcal mol^-1
+Dihedral   5:   C1 C3 C5 H8       66.53 deg    0.01735 kcal mol^-1
+Dihedral   6:   C1 C3 C5 H9     -176.49 deg    0.00504 kcal mol^-1
+Dihedral   7:   C2 C4 C6 H10    -176.20 deg    0.00592 kcal mol^-1
+Dihedral   8:   C2 C4 C6 H11      66.77 deg    0.01866 kcal mol^-1
+Dihedral   9:   C2 C1 C3 C5       54.62 deg    0.01184 kcal mol^-1
+Dihedral  10:   C2 C1 C3 H4      176.03 deg    0.00645 kcal mol^-1
+Dihedral  11:   C2 C1 C3 H5      -66.68 deg    0.01815 kcal mol^-1
+Dihedral  12:   C2 C1 C7 H12     -58.56 deg    0.00086 kcal mol^-1
+Dihedral  13:   C2 C1 C7 H13    -178.13 deg    0.00144 kcal mol^-1
+Dihedral  14:   C2 C1 C7 H14      61.65 deg    0.00112 kcal mol^-1
+Dihedral  15:   C3 C1 C2 C4      -54.62 deg    0.01182 kcal mol^-1
+Dihedral  16:   C3 C1 C2 H2       64.35 deg    0.00774 kcal mol^-1
+Dihedral  17:   C3 C1 C2 H3     -176.03 deg    0.00646 kcal mol^-1
+Dihedral  18:   C3 C5 C6 C4       54.46 deg    0.01253 kcal mol^-1
+Dihedral  19:   C3 C5 C6 H10     176.19 deg    0.00594 kcal mol^-1
+Dihedral  20:   C3 C5 C6 H11     -66.78 deg    0.01872 kcal mol^-1
+Dihedral  21:   C3 C1 C7 H12     178.13 deg    0.00143 kcal mol^-1
+Dihedral  22:   C3 C1 C7 H13      58.56 deg    0.00085 kcal mol^-1
+Dihedral  23:   C3 C1 C7 H14     -61.66 deg    0.00113 kcal mol^-1
+Dihedral  24:   C5 C6 C4 C2      -54.47 deg    0.01249 kcal mol^-1
+Dihedral  25:   C5 C6 C4 H6     -176.18 deg    0.00597 kcal mol^-1
+Dihedral  26:   C5 C6 C4 H7       66.82 deg    0.01892 kcal mol^-1
+Dihedral  27:   C7 C1 C2 C4     -177.83 deg    0.00194 kcal mol^-1
+Dihedral  28:   C7 C1 C2 H2      -58.86 deg    0.00053 kcal mol^-1
+Dihedral  29:   C7 C1 C2 H3       60.76 deg    0.00024 kcal mol^-1
+Dihedral  30:   C7 C1 C3 C5      177.83 deg    0.00194 kcal mol^-1
+Dihedral  31:   C7 C1 C3 H4      -60.76 deg    0.00024 kcal mol^-1
+Dihedral  32:   C7 C1 C3 H5       56.53 deg    0.00493 kcal mol^-1
+Dihedral  33:   H1 C1 C2 C4       64.10 deg    0.00690 kcal mol^-1
+Dihedral  34:   H1 C1 C2 H2     -176.93 deg    0.00387 kcal mol^-1
+Dihedral  35:   H1 C1 C2 H3      -57.31 deg    0.00298 kcal mol^-1
+Dihedral  36:   H1 C1 C3 C5      -64.11 deg    0.00691 kcal mol^-1
+Dihedral  37:   H1 C1 C3 H4       57.31 deg    0.00298 kcal mol^-1
+Dihedral  38:   H1 C1 C3 H5      174.60 deg    0.01192 kcal mol^-1
+Dihedral  39:   H1 C1 C7 H12      59.79 deg    0.00002 kcal mol^-1
+Dihedral  40:   H1 C1 C7 H13     -59.78 deg    0.00002 kcal mol^-1
+Dihedral  41:   H1 C1 C7 H14     180.00 deg    0.00000 kcal mol^-1
+Dihedral  42:   H2 C2 C4 C6      -65.42 deg    0.01199 kcal mol^-1
+Dihedral  43:   H2 C2 C4 H6       56.29 deg    0.00563 kcal mol^-1
+Dihedral  44:   H2 C2 C4 H7      173.27 deg    0.01841 kcal mol^-1
+Dihedral  45:   H3 C2 C4 C6      176.61 deg    0.00471 kcal mol^-1
+Dihedral  46:   H3 C2 C4 H6      -61.68 deg    0.00115 kcal mol^-1
+Dihedral  47:   H3 C2 C4 H7       55.30 deg    0.00902 kcal mol^-1
+Dihedral  48:   H4 C3 C5 C6     -176.61 deg    0.00472 kcal mol^-1
+Dihedral  49:   H4 C3 C5 H8      -55.30 deg    0.00904 kcal mol^-1
+Dihedral  50:   H4 C3 C5 H9       61.68 deg    0.00116 kcal mol^-1
+Dihedral  51:   H5 C3 C5 C6       66.93 deg    0.01955 kcal mol^-1
+Dihedral  52:   H5 C3 C5 H8     -171.76 deg    0.02748 kcal mol^-1
+Dihedral  53:   H5 C3 C5 H9      -54.78 deg    0.01113 kcal mol^-1
+Dihedral  54:   H6 C4 C6 H10      62.09 deg    0.00179 kcal mol^-1
+Dihedral  55:   H6 C4 C6 H11     -54.94 deg    0.01046 kcal mol^-1
+Dihedral  56:   H7 C4 C6 H10     -54.91 deg    0.01059 kcal mol^-1
+Dihedral  57:   H7 C4 C6 H11    -171.94 deg    0.02633 kcal mol^-1
+Dihedral  58:   H8 C5 C6 C4      -66.83 deg    0.01896 kcal mol^-1
+Dihedral  59:   H8 C5 C6 H10      54.91 deg    0.01060 kcal mol^-1
+Dihedral  60:   H8 C5 C6 H11     171.93 deg    0.02639 kcal mol^-1
+Dihedral  61:   H9 C5 C6 C4      176.18 deg    0.00599 kcal mol^-1
+Dihedral  62:   H9 C5 C6 H10     -62.09 deg    0.00180 kcal mol^-1
+Dihedral  63:   H9 C5 C6 H11      54.93 deg    0.01050 kcal mol^-1
+
+Total number of dihedrals 63. Total energy contribution : 0.5281 kcal · mol^-1
+
+VdW repulsion information:
+
+             Atoms     Distance             Energy
+Pair 1  : C1 C2        1.5347 A          0.00000 kcal mol^-1
+Pair 2  : C1 C3        1.5346 A          0.00000 kcal mol^-1
+Pair 3  : C1 C4        2.5332 A          0.00000 kcal mol^-1
+Pair 4  : C1 C5        2.5332 A          0.00000 kcal mol^-1
+Pair 5  : C1 C6        2.9611 A          1.31855 kcal mol^-1
+Pair 6  : C1 C7        1.5276 A          0.00000 kcal mol^-1
+Pair 7  : C1 H1        1.0983 A          0.00000 kcal mol^-1
+Pair 8  : C1 H2        2.6408 A          0.00000 kcal mol^-1
+Pair 9  : C1 H3        2.1693 A          0.00000 kcal mol^-1
+Pair 10 : C1 H4        2.1692 A          0.00000 kcal mol^-1
+Pair 11 : C1 H5        2.1693 A          0.00000 kcal mol^-1
+Pair 12 : C1 H6        3.4783 A         -0.04081 kcal mol^-1
+Pair 13 : C1 H7        2.8233 A          0.03654 kcal mol^-1
+Pair 14 : C1 H8        2.8234 A          0.03647 kcal mol^-1
+Pair 15 : C1 H9        3.4783 A         -0.04082 kcal mol^-1
+Pair 16 : C1 H10       3.9462 A         -0.02426 kcal mol^-1
+Pair 17 : C1 H11       3.3869 A         -0.04371 kcal mol^-1
+Pair 18 : C1 H12       2.1722 A          0.00000 kcal mol^-1
+Pair 19 : C1 H13       2.1723 A          0.00000 kcal mol^-1
+Pair 20 : C1 H14       2.1797 A          0.00000 kcal mol^-1
+Pair 21 : C2 C3        2.5273 A          0.00000 kcal mol^-1
+Pair 22 : C2 C4        1.5270 A          0.00000 kcal mol^-1
+Pair 23 : C2 C5        2.9510 A          1.38990 kcal mol^-1
+Pair 24 : C2 C6        2.5253 A          0.00000 kcal mol^-1
+Pair 25 : C2 C7        2.5189 A          0.00000 kcal mol^-1
+Pair 26 : C2 H1        2.1498 A          0.00000 kcal mol^-1
+Pair 27 : C2 H2        1.6953 A          0.00000 kcal mol^-1
+Pair 28 : C2 H3        1.0966 A          0.00000 kcal mol^-1
+Pair 29 : C2 H4        3.4779 A         -0.04083 kcal mol^-1
+Pair 30 : C2 H5        2.8238 A          0.03621 kcal mol^-1
+Pair 31 : C2 H6        2.1581 A          0.00000 kcal mol^-1
+Pair 32 : C2 H7        2.1561 A          0.00000 kcal mol^-1
+Pair 33 : C2 H8        3.3757 A         -0.04401 kcal mol^-1
+Pair 34 : C2 H9        3.9371 A         -0.02453 kcal mol^-1
+Pair 35 : C2 H10       3.4701 A         -0.04110 kcal mol^-1
+Pair 36 : C2 H11       2.8190 A          0.03922 kcal mol^-1
+Pair 37 : C2 H12       2.7597 A          0.08403 kcal mol^-1
+Pair 38 : C2 H13       3.4770 A         -0.04086 kcal mol^-1
+Pair 39 : C2 H14       2.7935 A          0.05651 kcal mol^-1
+Pair 40 : C3 C4        2.9509 A          1.39042 kcal mol^-1
+Pair 41 : C3 C5        1.5270 A          0.00000 kcal mol^-1
+Pair 42 : C3 C6        2.5254 A          0.00000 kcal mol^-1
+Pair 43 : C3 C7        2.5188 A          0.00000 kcal mol^-1
+Pair 44 : C3 H1        2.1496 A          0.00000 kcal mol^-1
+Pair 45 : C3 H2        3.1054 A         -0.04108 kcal mol^-1
+Pair 46 : C3 H3        3.4779 A         -0.04083 kcal mol^-1
+Pair 47 : C3 H4        1.0966 A          0.00000 kcal mol^-1
+Pair 48 : C3 H5        1.0976 A          0.00000 kcal mol^-1
+Pair 49 : C3 H6        3.9370 A         -0.02453 kcal mol^-1
+Pair 50 : C3 H7        3.3755 A         -0.04402 kcal mol^-1
+Pair 51 : C3 H8        2.1560 A          0.00000 kcal mol^-1
+Pair 52 : C3 H9        2.1581 A          0.00000 kcal mol^-1
+Pair 53 : C3 H10       3.4701 A         -0.04110 kcal mol^-1
+Pair 54 : C3 H11       2.8190 A          0.03917 kcal mol^-1
+Pair 55 : C3 H12       3.4769 A         -0.04087 kcal mol^-1
+Pair 56 : C3 H13       2.7598 A          0.08394 kcal mol^-1
+Pair 57 : C3 H14       2.7934 A          0.05657 kcal mol^-1
+Pair 58 : C4 C5        2.5231 A          0.00000 kcal mol^-1
+Pair 59 : C4 C6        1.5254 A          0.00000 kcal mol^-1
+Pair 60 : C4 C7        3.8818 A         -0.06961 kcal mol^-1
+Pair 61 : C4 H1        2.7893 A          0.05966 kcal mol^-1
+Pair 62 : C4 H2        2.6002 A          0.00000 kcal mol^-1
+Pair 63 : C4 H3        2.1535 A          0.00000 kcal mol^-1
+Pair 64 : C4 H4        3.9386 A         -0.02448 kcal mol^-1
+Pair 65 : C4 H5        3.3757 A         -0.04401 kcal mol^-1
+Pair 66 : C4 H6        1.0958 A          0.00000 kcal mol^-1
+Pair 67 : C4 H7        1.0970 A          0.00000 kcal mol^-1
+Pair 68 : C4 H8        2.8175 A          0.04011 kcal mol^-1
+Pair 69 : C4 H9        3.4678 A         -0.04118 kcal mol^-1
+Pair 70 : C4 H10       2.1572 A          0.00000 kcal mol^-1
+Pair 71 : C4 H11       2.1548 A          0.00000 kcal mol^-1
+Pair 72 : C4 H12       4.1940 A         -0.01779 kcal mol^-1
+Pair 73 : C4 H13       4.6964 A         -0.00957 kcal mol^-1
+Pair 74 : C4 H14       4.1978 A         -0.01770 kcal mol^-1
+Pair 75 : C5 C6        1.5255 A          0.00000 kcal mol^-1
+Pair 76 : C5 C7        3.8817 A         -0.06961 kcal mol^-1
+Pair 77 : C5 H1        2.7893 A          0.05966 kcal mol^-1
+Pair 78 : C5 H2        3.6767 A         -0.03343 kcal mol^-1
+Pair 79 : C5 H3        3.9386 A         -0.02448 kcal mol^-1
+Pair 80 : C5 H4        2.1534 A          0.00000 kcal mol^-1
+Pair 81 : C5 H5        2.1534 A          0.00000 kcal mol^-1
+Pair 82 : C5 H6        3.4678 A         -0.04118 kcal mol^-1
+Pair 83 : C5 H7        2.8174 A          0.04018 kcal mol^-1
+Pair 84 : C5 H8        1.0970 A          0.00000 kcal mol^-1
+Pair 85 : C5 H9        1.0958 A          0.00000 kcal mol^-1
+Pair 86 : C5 H10       2.1572 A          0.00000 kcal mol^-1
+Pair 87 : C5 H11       2.1549 A          0.00000 kcal mol^-1
+Pair 88 : C5 H12       4.6962 A         -0.00957 kcal mol^-1
+Pair 89 : C5 H13       4.1941 A         -0.01779 kcal mol^-1
+Pair 90 : C5 H14       4.1977 A         -0.01771 kcal mol^-1
+Pair 91 : C6 C7        4.3651 A         -0.05463 kcal mol^-1
+Pair 92 : C6 H1        3.3424 A         -0.04480 kcal mol^-1
+Pair 93 : C6 H2        3.0777 A         -0.03868 kcal mol^-1
+Pair 94 : C6 H3        3.4670 A         -0.04121 kcal mol^-1
+Pair 95 : C6 H4        3.4671 A         -0.04121 kcal mol^-1
+Pair 96 : C6 H5        2.8172 A          0.04035 kcal mol^-1
+Pair 97 : C6 H6        2.1568 A          0.00000 kcal mol^-1
+Pair 98 : C6 H7        2.1551 A          0.00000 kcal mol^-1
+Pair 99 : C6 H8        2.1552 A          0.00000 kcal mol^-1
+Pair 100: C6 H9        2.1569 A          0.00000 kcal mol^-1
+Pair 101: C6 H10       1.0958 A          0.00000 kcal mol^-1
+Pair 102: C6 H11       1.0970 A          0.00000 kcal mol^-1
+Pair 103: C6 H12       4.9914 A         -0.00676 kcal mol^-1
+Pair 104: C6 H13       4.9915 A         -0.00676 kcal mol^-1
+Pair 105: C6 H14       4.5461 A         -0.01148 kcal mol^-1
+Pair 106: C7 H1        2.1376 A          0.00000 kcal mol^-1
+Pair 107: C7 H2        3.0357 A         -0.03369 kcal mol^-1
+Pair 108: C7 H3        2.7676 A          0.07711 kcal mol^-1
+Pair 109: C7 H4        2.7675 A          0.07721 kcal mol^-1
+Pair 110: C7 H5        2.7333 A          0.10980 kcal mol^-1
+Pair 111: C7 H6        4.6706 A         -0.00987 kcal mol^-1
+Pair 112: C7 H7        4.2260 A         -0.01709 kcal mol^-1
+Pair 113: C7 H8        4.2261 A         -0.01709 kcal mol^-1
+Pair 114: C7 H9        4.6705 A         -0.00987 kcal mol^-1
+Pair 115: C7 H10       5.4041 A         -0.00426 kcal mol^-1
+Pair 116: C7 H11       4.5697 A         -0.01116 kcal mol^-1
+Pair 117: C7 H12       1.0951 A          0.00000 kcal mol^-1
+Pair 118: C7 H13       1.0951 A          0.00000 kcal mol^-1
+Pair 119: C7 H14       1.0952 A          0.00000 kcal mol^-1
+Pair 120: H1 H2        3.5997 A         -0.00961 kcal mol^-1
+Pair 121: H1 H3        2.4636 A         -0.01490 kcal mol^-1
+Pair 122: H1 H4        2.4635 A         -0.01487 kcal mol^-1
+Pair 123: H1 H5        3.0614 A         -0.02139 kcal mol^-1
+Pair 124: H1 H6        3.7907 A         -0.00723 kcal mol^-1
+Pair 125: H1 H7        2.6335 A         -0.02936 kcal mol^-1
+Pair 126: H1 H8        2.6336 A         -0.02937 kcal mol^-1
+Pair 127: H1 H9        3.7907 A         -0.00723 kcal mol^-1
+Pair 128: H1 H10       4.1431 A         -0.00436 kcal mol^-1
+Pair 129: H1 H11       4.0350 A         -0.00508 kcal mol^-1
+Pair 130: H1 H12       2.4776 A         -0.01723 kcal mol^-1
+Pair 131: H1 H13       2.4777 A         -0.01725 kcal mol^-1
+Pair 132: H1 H14       3.0640 A         -0.02131 kcal mol^-1
+Pair 133: H2 H3        2.2976 A          0.00000 kcal mol^-1
+Pair 134: H2 H4        4.1017 A         -0.00462 kcal mol^-1
+Pair 135: H2 H5        2.7448 A         -0.02966 kcal mol^-1
+Pair 136: H2 H6        2.7586 A         -0.02947 kcal mol^-1
+Pair 137: H2 H7        3.5738 A         -0.01000 kcal mol^-1
+Pair 138: H2 H8        4.4634 A         -0.00283 kcal mol^-1
+Pair 139: H2 H9        4.3703 A         -0.00320 kcal mol^-1
+Pair 140: H2 H10       4.0621 A         -0.00489 kcal mol^-1
+Pair 141: H2 H11       2.7088 A         -0.02997 kcal mol^-1
+Pair 142: H2 H12       3.3988 A         -0.01303 kcal mol^-1
+Pair 143: H2 H13       4.0364 A         -0.00507 kcal mol^-1
+Pair 144: H2 H14       2.6393 A         -0.02949 kcal mol^-1
+Pair 145: H3 H4        4.3103 A         -0.00347 kcal mol^-1
+Pair 146: H3 H5        3.8273 A         -0.00685 kcal mol^-1
+Pair 147: H3 H6        2.4931 A         -0.01949 kcal mol^-1
+Pair 148: H3 H7        2.4492 A         -0.01217 kcal mol^-1
+Pair 149: H3 H8        4.1839 A         -0.00412 kcal mol^-1
+Pair 150: H3 H9        4.9707 A         -0.00150 kcal mol^-1
+Pair 151: H3 H10       4.2883 A         -0.00357 kcal mol^-1
+Pair 152: H3 H11       3.8133 A         -0.00699 kcal mol^-1
+Pair 153: H3 H12       2.5558 A         -0.02586 kcal mol^-1
+Pair 154: H3 H13       3.7631 A         -0.00753 kcal mol^-1
+Pair 155: H3 H14       3.1547 A         -0.01875 kcal mol^-1
+Pair 156: H4 H5        1.7617 A          0.00000 kcal mol^-1
+Pair 157: H4 H6        4.9707 A         -0.00150 kcal mol^-1
+Pair 158: H4 H7        4.1836 A         -0.00412 kcal mol^-1
+Pair 159: H4 H8        2.4490 A         -0.01214 kcal mol^-1
+Pair 160: H4 H9        2.4930 A         -0.01949 kcal mol^-1
+Pair 161: H4 H10       4.2883 A         -0.00357 kcal mol^-1
+Pair 162: H4 H11       3.8134 A         -0.00699 kcal mol^-1
+Pair 163: H4 H12       3.7630 A         -0.00753 kcal mol^-1
+Pair 164: H4 H13       2.5559 A         -0.02587 kcal mol^-1
+Pair 165: H4 H14       3.1546 A         -0.01876 kcal mol^-1
+Pair 166: H5 H6        4.1817 A         -0.00414 kcal mol^-1
+Pair 167: H5 H7        4.0607 A         -0.00490 kcal mol^-1
+Pair 168: H5 H8        3.0561 A         -0.02154 kcal mol^-1
+Pair 169: H5 H9        2.4483 A         -0.01200 kcal mol^-1
+Pair 170: H5 H10       3.8143 A         -0.00698 kcal mol^-1
+Pair 171: H5 H11       2.6680 A         -0.02989 kcal mol^-1
+Pair 172: H5 H12       3.7534 A         -0.00764 kcal mol^-1
+Pair 173: H5 H13       3.0576 A         -0.02150 kcal mol^-1
+Pair 174: H5 H14       2.5556 A         -0.02585 kcal mol^-1
+Pair 175: H6 H7        1.7619 A          0.00000 kcal mol^-1
+Pair 176: H6 H8        3.8153 A         -0.00697 kcal mol^-1
+Pair 177: H6 H9        4.2903 A         -0.00356 kcal mol^-1
+Pair 178: H6 H10       2.5006 A         -0.02048 kcal mol^-1
+Pair 179: H6 H11       2.4516 A         -0.01265 kcal mol^-1
+Pair 180: H6 H12       4.8585 A         -0.00172 kcal mol^-1
+Pair 181: H6 H13       5.5857 A         -0.00075 kcal mol^-1
+Pair 182: H6 H14       4.8509 A         -0.00173 kcal mol^-1
+Pair 183: H7 H8        2.6693 A         -0.02990 kcal mol^-1
+Pair 184: H7 H9        3.8153 A         -0.00697 kcal mol^-1
+Pair 185: H7 H10       2.4522 A         -0.01277 kcal mol^-1
+Pair 186: H7 H11       3.0572 A         -0.02151 kcal mol^-1
+Pair 187: H7 H12       4.4178 A         -0.00301 kcal mol^-1
+Pair 188: H7 H13       4.9236 A         -0.00159 kcal mol^-1
+Pair 189: H7 H14       4.7760 A         -0.00190 kcal mol^-1
+Pair 190: H8 H9        1.7620 A          0.00000 kcal mol^-1
+Pair 191: H8 H10       2.4522 A         -0.01277 kcal mol^-1
+Pair 192: H8 H11       3.0572 A         -0.02151 kcal mol^-1
+Pair 193: H8 H12       4.9237 A         -0.00159 kcal mol^-1
+Pair 194: H8 H13       4.4181 A         -0.00300 kcal mol^-1
+Pair 195: H8 H14       4.7760 A         -0.00190 kcal mol^-1
+Pair 196: H9 H10       2.5006 A         -0.02048 kcal mol^-1
+Pair 197: H9 H11       2.4515 A         -0.01264 kcal mol^-1
+Pair 198: H9 H12       5.5855 A         -0.00075 kcal mol^-1
+Pair 199: H9 H13       4.8586 A         -0.00172 kcal mol^-1
+Pair 200: H9 H14       4.8507 A         -0.00173 kcal mol^-1
+Pair 201: H10 H11      1.7621 A          0.00000 kcal mol^-1
+Pair 202: H10 H12      5.9898 A         -0.00049 kcal mol^-1
+Pair 203: H10 H13      5.9900 A         -0.00049 kcal mol^-1
+Pair 204: H10 H14      5.6357 A         -0.00071 kcal mol^-1
+Pair 205: H11 H12      5.2546 A         -0.00108 kcal mol^-1
+Pair 206: H11 H13      5.2547 A         -0.00108 kcal mol^-1
+Pair 207: H11 H14      4.4839 A         -0.00276 kcal mol^-1
+Pair 208: H12 H13      1.7698 A          0.00000 kcal mol^-1
+Pair 209: H12 H14      1.7722 A          0.00000 kcal mol^-1
+Pair 210: H13 H14      1.7722 A          0.00000 kcal mol^-1
+
+Total number of unique atom pairss: 210. Total energy: 2.7952 kcal mol^-1.
+
+Energy contribution per type is:
+Str: 120.7899 kcal · mol^-1
+Ben: 1.0536 kcal · mol^-1
+Dih: 0.5281 kcal · mol^-1
+VdW: 2.7952 kcal · mol^-1
+
+:: TOTAL ENERGY = 125.16679124 kcal · mol^-1
+
+
+
+################################################################################
+#                                                                              #
+#                                                                              #
+#                                                                              #
+#                              Gradient calculation                            #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
+
+
+
+Analitical gradient of stretching energy:
+C1    -3.7884   -0.0797   -9.6182
+C2    21.3282   -8.2584 -411.8420
+C3    -1.7981  -10.5049    5.4236
+C4     4.7769    6.3485   -3.8932
+C5     4.7093   -6.3782   -3.8964
+C6     7.1852    0.0471    4.2321
+C7    -9.3795   -0.0364    2.5877
+H1    -0.1810    0.0000    8.2113
+H2   -22.3794   18.2467  408.7020
+H3     4.1146   -7.6499    3.6177
+H4     4.1146    7.6499    3.6177
+H5     0.7309    0.5960   -8.6023
+H6    -4.4413   -8.0073   -3.8432
+H7    -0.8096   -0.6068    9.0619
+H8    -0.8090    0.6074    9.0463
+H9    -4.4301    7.9886   -3.8361
+H10   -9.4565    0.0009    3.1501
+H11   -0.2346    0.0000   -9.1232
+H12    4.9351   -8.4137    3.6402
+H13    4.9595    8.4501    3.6568
+H14    0.8534    0.0000  -10.2929
+
+Analitical gradient of bending energy:
+C1    -3.8984   -0.0454    9.5319
+C2    -0.2100   -1.4015   -8.7671
+C3     2.6900    4.6523   -9.0333
+C4    -1.6182   -2.3188    9.4428
+C5    -1.9478    2.3603    8.1444
+C6    -2.3992    0.0124   -8.2704
+C7     8.7306   -0.0140   -4.4783
+H1    -0.5122   -0.0018   -0.0113
+H2     1.2668    0.4669    0.0485
+H3     0.4351    0.5977    0.7689
+H4    -0.0748   -1.3227    2.8820
+H5    -0.8448   -2.9781   -0.2781
+H6     0.6883    0.9504   -2.7755
+H7     1.3508    2.4165    0.2825
+H8     1.3484   -2.4182    0.2830
+H9     0.6900   -0.9507   -2.7767
+H10    0.9573   -0.0054    2.8739
+H11    2.7569   -0.0053   -0.0709
+H12   -2.8025   -1.1004    1.2561
+H13   -2.8137    1.1052    1.2620
+H14   -3.7927    0.0004   -0.3145
+
+Analitical gradient of torsional energy:
+C1     0.4507   -0.0264    2.0039
+C2     0.0365   -0.0036   -1.3595
+C3     0.4500    0.7924   -1.1798
+C4    -0.5434   -0.7818    0.9560
+C5    -0.5495    0.7267    0.9293
+C6    -0.8438    0.0224   -1.0438
+C7     0.0758    0.0354    0.2541
+H1    -0.8584   -0.0516   -0.0189
+H2    -0.2195    0.5829   -0.0380
+H3     0.1140   -0.2379   -0.6328
+H4     0.1139    0.2382   -0.6333
+H5    -0.6073   -1.2675   -0.1394
+H6    -0.2198   -0.2266    0.7260
+H7     0.7705    1.2605    0.1532
+H8     0.7723   -1.3252    0.1581
+H9    -0.2060    0.2617    0.7829
+H10   -0.2762    0.0002   -0.8291
+H11    1.5548   -0.0007   -0.0400
+H12   -0.0072   -0.0146   -0.0240
+H13   -0.0074    0.0151   -0.0248
+H14    0.0000    0.0001    0.0000
+
+Analitical gradient of VdW energy:
+C1     7.6271    0.0001    0.9706
+C2     2.5968   -7.3761   -0.2768
+C3     2.6164    6.8796   -0.4713
+C4    -4.1346   -7.0300    0.3343
+C5    -4.1288    7.0222    0.3240
+C6    -7.1812   -0.2589   -1.1239
+C7     1.8632   -0.4546    0.3081
+H1     0.9501    0.0073    0.8835
+H2    -0.0627   -0.1168   -0.0911
+H3    -0.3426   -0.7891   -0.0634
+H4    -0.3423    0.7934   -0.0629
+H5    -0.1579    1.2769   -0.8969
+H6     0.0349   -0.1603    0.0621
+H7    -0.5306   -0.8716    0.5686
+H8    -0.5228    0.8733    0.5588
+H9    -0.1474    0.2326    0.1571
+H10   -0.2607    0.0014   -0.1756
+H11   -0.9531   -0.0063   -0.6415
+H12    0.9623    0.1431    0.0506
+H13    0.9549   -0.1386    0.0490
+H14    1.1588   -0.0276   -0.4633
+
+Analitical gradient of overall energy:
+C1     0.3909   -0.1513    2.8882
+C2    23.7515  -17.0397 -422.2454
+C3     3.9582    1.8194   -5.2608
+C4    -1.5192   -3.7822    6.8398
+C5    -1.9167    3.7311    5.5013
+C6    -3.2390   -0.1770   -6.2060
+C7     1.2900   -0.4696   -1.3283
+H1    -0.6015   -0.0461    9.0646
+H2   -21.3947   19.1798  408.6214
+H3     4.3211   -8.0793    3.6904
+H4     3.8114    7.3589    5.8036
+H5    -0.8791   -2.3726   -9.9168
+H6    -3.9378   -7.4438   -5.8307
+H7     0.7810    2.1987   10.0662
+H8     0.7889   -2.2627   10.0461
+H9    -4.0934    7.5322   -5.6727
+H10   -9.0361   -0.0029    5.0192
+H11    3.1240   -0.0122   -9.8756
+H12    3.0876   -9.3856    4.9229
+H13    3.0933    9.4318    4.9430
+H14   -1.7805   -0.0270  -11.0706
