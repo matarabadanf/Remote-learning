@@ -8,6 +8,7 @@ Created on Sat Oct 26 17:13:29 2024
 from contextlib import redirect_stdout
 import time
 import sys
+import os
 
 import numpy as np
 import pandas as pd
@@ -40,9 +41,7 @@ np.set_printoptions(
 # internal coordinate defined later by indexing an identifiyng integer as
 # prop[identifier_int]
 
-COORDINATE_TYPE = np.array(
-    ["C-C", "C-H", "H-C-H", "H-C-C", "C-C-C", "X-C-C-X"]
-)
+COORDINATE_TYPE = np.array(["C-C", "C-H", "H-C-H", "H-C-C", "C-C-C", "X-C-C-X"])
 F_CONST = np.array([300, 350, 35, 35, 60, 0.3])
 EQ_DIST = np.array([1.53, 1.11, 109.50, 109.50, 109.50, 3])
 
@@ -1110,7 +1109,10 @@ def line_search(r_k, p_k, grad_0) -> [Vector, Matrix, float]:
                 "Wolfe condition %.5f <= %.5f is met.\n"
                 % (
                     energy,
-                    energy_minus_one + 0.1 * alpha * np.dot(
+                    energy_minus_one
+                    + 0.1
+                    * alpha
+                    * np.dot(
                         p_k.reshape(-1),
                         grad_0[-1].reshape(-1),
                     ),
@@ -1580,38 +1582,22 @@ def print_gradient_contribution(
         print("\nAnalitical gradient of stretching energy:")
         for i, label in enumerate(EXT_LAB):
             g_x, g_y, g_z = stretching_gradient[i]
-            print(
-                "{:<3} {:9.4f} {:9.4f} {:9.4f}".format(
-                    label, g_x, g_y, g_z
-                )
-            )
+            print("{:<3} {:9.4f} {:9.4f} {:9.4f}".format(label, g_x, g_y, g_z))
 
         print("\nAnalitical gradient of bending energy:")
         for i, label in enumerate(EXT_LAB):
             g_x, g_y, g_z = angle_gradient[i]
-            print(
-                "{:<3} {:9.4f} {:9.4f} {:9.4f}".format(
-                    label, g_x, g_y, g_z
-                )
-            )
+            print("{:<3} {:9.4f} {:9.4f} {:9.4f}".format(label, g_x, g_y, g_z))
 
         print("\nAnalitical gradient of torsional energy:")
         for i, label in enumerate(EXT_LAB):
             g_x, g_y, g_z = dihedral_gradient[i]
-            print(
-                "{:<3} {:9.4f} {:9.4f} {:9.4f}".format(
-                    label, g_x, g_y, g_z
-                )
-            )
+            print("{:<3} {:9.4f} {:9.4f} {:9.4f}".format(label, g_x, g_y, g_z))
 
         print("\nAnalitical gradient of VdW energy:")
         for i, label in enumerate(EXT_LAB):
             g_x, g_y, g_z = vdw_gradient[i]
-            print(
-                "{:<3} {:9.4f} {:9.4f} {:9.4f}".format(
-                    label, g_x, g_y, g_z
-                )
-            )
+            print("{:<3} {:9.4f} {:9.4f} {:9.4f}".format(label, g_x, g_y, g_z))
 
     total_gradient = (
         stretching_gradient + angle_gradient + dihedral_gradient + vdw_gradient
@@ -1620,9 +1606,7 @@ def print_gradient_contribution(
     print("\nAnalitical gradient of overall energy:")
     for i, label in enumerate(EXT_LAB):
         g_x, g_y, g_z = total_gradient[i]
-        print(
-            "{:<3} {:9.4f} {:9.4f} {:9.4f}".format(label, g_x, g_y, g_z)
-        )
+        print("{:<3} {:9.4f} {:9.4f} {:9.4f}".format(label, g_x, g_y, g_z))
 
 
 def calculate_and_print_energy(
@@ -1780,7 +1764,10 @@ def mol1_report(mol2_file: str):
     """Generate the report that includes energy and gradient of the molecule."""
 
     with open(
-        mol2_file.replace(".mol2", "") + "_matis.out1", "w", encoding="utf-8"
+        mol2_file.replace(".mol2", "").replace("inputs/", "results/")
+        + "_matis.out1",
+        "w",
+        encoding="utf-8",
     ) as f:
         with redirect_stdout(f):
             print_section_title("Geometry input section")
@@ -1811,7 +1798,10 @@ def mol2_report(mol2_file: str):
     """Generate the report including the BFGS optimization using cartesian."""
 
     with open(
-        mol2_file.replace(".mol2", "") + "_matis.out2", "w", encoding="utf-8"
+        mol2_file.replace(".mol2", "").replace("inputs/", "results/")
+        + "_matis.out2",
+        "w",
+        encoding="utf-8",
     ) as f:
         with redirect_stdout(f):
             print_section_title("Geometry input section, energy and gradient")
@@ -1839,8 +1829,12 @@ def mol3_report(mol2_file):
     """Generates the report that includes the optimization in internal coordinates"""
 
     with open(
-        mol2_file.replace(".mol2", "") + "_matis.out3", "w", encoding="utf-8"
+        mol2_file.replace(".mol2", "").replace("inputs/", "results/")
+        + "_matis.out3",
+        "w",
+        encoding="utf-8",
     ) as f:
+
         with redirect_stdout(f):
             print_section_title("Geometry input section, energy and gradient")
             atom_coord_2d = startup(mol2_file)[2]
@@ -1856,11 +1850,9 @@ def mol3_report(mol2_file):
 
             # calculate B, G, G inverse matrix
 
-            b_matrix, g_matrix, Lambda, g_inverse = (
-                calculate_internal_matrices(
-                    atom_coord_2d,
-                    r_vector_matrix,
-                )
+            b_matrix, g_matrix, Lambda, g_inverse = calculate_internal_matrices(
+                atom_coord_2d,
+                r_vector_matrix,
             )
             cartesian_grad = calculate_gradient_from_cartesian(atom_coord_2d)
 
@@ -1871,14 +1863,21 @@ def mol3_report(mol2_file):
             internal_BFGS_optimization(atom_coord_2d, r_vector_matrix)
 
 
-default_filename = "methane.mol2"
+def main(filename: str):
+    """
+    Main function that calls to each individual report.
 
-if __name__ == "__main__":
-    # add the possibility to input the filename from the terminal.
-    try:
-        filename = sys.argv[1]
-    except IndexError:
-        filename = default_filename
+    Parameters
+    ----------
+    filename : str
+        Input file path.
+
+
+    Returns
+    -------
+    None.
+
+    """
 
     define_constants(filename)
 
@@ -1891,3 +1890,17 @@ if __name__ == "__main__":
     d = time.perf_counter()
 
     print("Time consumption: %.2f, %.2f, %.2f" % (b - a, c - b, d - c))
+
+
+default_filename = os.getcwd() + "/inputs/methane.mol2"
+path = os.getcwd()
+
+if __name__ == "__main__":
+    # add the possibility to input the filename from the terminal.
+    path = os.getcwd()
+    try:
+        filename = sys.argv[1]
+    except IndexError:
+        filename = default_filename
+
+    main(filename)
