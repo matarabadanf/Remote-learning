@@ -1705,14 +1705,42 @@ def print_internal_matrices(
 
 
 def regular_format(mol2_file: str) -> bool:
-    """Read the mol2 file, and identify if it has sections or not"""
+    """
+    Read the mol2 file, and identify if it has sections or not.
+
+    Parameters
+    ----------
+    mol2_file : str
+        DESCRIPTION.
+
+    Returns
+    -------
+    bool
+        True if there are separators. False othewise.
+
+    """
 
     f = read_mol2_file(mol2_file)
     return "@" in f[0]
 
 
-def startup(mol2_file: str) -> list:
-    """extracts the basic information contained in the mol2 file"""
+def startup(mol2_file: str) -> list[int, list[str], Vector, Matrix]:
+    """
+    Extracts the basic information contained in the mol2 file.
+    The unconventional mol2 file calls the function that reads the
+    contents of a mol2 file without @<> separators.
+
+
+    Parameters
+    ----------
+    mol2_file : str
+        Input file path.
+
+    Returns
+    -------
+    list
+        Returns a list that contains [number_of_atoms, ATOM_LABELS, atom_coord_2d, CONNECTIVITY_MATRIX].
+    """
 
     if regular_format(mol2_file):
         global N_ATOMS
@@ -1735,8 +1763,20 @@ def startup(mol2_file: str) -> list:
 
 
 def define_constants(mol2_file: str):
-    """Defines all the constants of the system, such as number of atoms,
-    , internal coordinate types, bonds..."""
+    """
+    Defines all the constants of the system, such as number of atoms,
+    internal coordinate types, bonds...
+
+    Parameters
+    ----------
+    mol2_file : str
+        DESCRIPTION.
+
+    Returns
+    -------
+    None, but modifies the global scope setting the value of the constants.
+
+    """
 
     global N_ATOMS, ATOM_LABELS, CONNECTIVITY_MATRIX, EXT_LAB, BOND_LIST, ANGLE_LIST
     global DIHEDRAL_LIST, UN, BOND_TYPES, ANGLE_TYPES, INTERNAL_COORDINATE_MEMEBERS, INTERNAL_COORDINATE_TYPES
@@ -1761,7 +1801,19 @@ def define_constants(mol2_file: str):
 
 
 def mol1_report(mol2_file: str):
-    """Generate the report that includes energy and gradient of the molecule."""
+    """
+    Generate the report that includes energy and gradient of the molecule.
+
+    Parameters
+    ----------
+    filename : str
+        Input file path.
+
+    Returns
+    -------
+    None.
+
+    """
 
     with open(
         mol2_file.replace(".mol2", "").replace("inputs/", "results/")
@@ -1795,7 +1847,19 @@ def mol1_report(mol2_file: str):
 
 
 def mol2_report(mol2_file: str):
-    """Generate the report including the BFGS optimization using cartesian."""
+    """
+    Generates the report that includes the optimization in cartesian coordinates
+
+    Parameters
+    ----------
+    filename : str
+        Input file path.
+
+    Returns
+    -------
+    None.
+
+    """
 
     with open(
         mol2_file.replace(".mol2", "").replace("inputs/", "results/")
@@ -1825,8 +1889,20 @@ def mol2_report(mol2_file: str):
             BFGS_optimization(atom_coord_2d, grad_0)
 
 
-def mol3_report(mol2_file):
-    """Generates the report that includes the optimization in internal coordinates"""
+def mol3_report(mol2_file: str):
+    """
+    Generates the report that includes the optimization in internal coordinates
+
+    Parameters
+    ----------
+    filename : str
+        Input file path.
+
+    Returns
+    -------
+    None.
+
+    """
 
     with open(
         mol2_file.replace(".mol2", "").replace("inputs/", "results/")
