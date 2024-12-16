@@ -1,6 +1,23 @@
 # Remote-learning
+Final version of the Remote Learning subject program. It takes a `.mol2` file from the `/inputs` directory as input and generates 3 output files in the `/results` directory:
 
-# results
+- **.out1**: Prints energy contribution of each bond, angle and dihedral. Also prints the gradient in cartesian coordinates and the contribution of each set of internals to the gradient.
+- **.out2**: Log of the optimization in cartesian coordinates using the BGFS Quasi-Neowton optimization algorithm.
+- **.out3**: Log of the optimization in internal coordinates using the BGFS Quasi-Neowton optimization algorithm. 
+
+# Excution
+The program can be executed from the terminal as:
+```bash
+python3 geom_optimizer.py inputs/filename.mol3
+```
+Or by modifying in the script file the variable `default_filename`:
+```python3
+default_filename = os.getcwd() + "/inputs/methane.mol2"
+```
+
+
+# Results
+## Cartesian optimization
 
 | Filename                    | Cartesian opt. ref. energy / $kcal · mol^{-1}$ | Cartesian opt. energy / $kcal · mol^{-1}$ | Deviation /  $kcal · mol^{-1}$ |
 | --------------------------- | ---------------------------------------------- | ----------------------------------------- | ------------------------------ |
@@ -18,7 +35,7 @@
 | Pinane_reordered            | $-$                                              | $80.28770984$                               | $-$                              |
 
 
-# internal
+## Internal optimization
 
 
 | Filename                    | Internal opt. ref. energy / $kcal · mol^{-1}$ | Internal opt. energy / $kcal · mol^{-1}$ | Deviation /  $kcal · mol^{-1}$ |
