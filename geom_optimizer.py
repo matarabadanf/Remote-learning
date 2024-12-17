@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Oct 26 17:13:29 2024
+Created on Sat Oct 26 17:13:29 2024.
 
 @author: matar
 """
@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 
-# defining types for readability
+# defining types for hinting input and output types in the functions
 Vector = list[float]
 Matrix = np.array([int, int])
 
@@ -23,17 +23,15 @@ np.set_printoptions(
     precision=3, suppress=True, threshold=np.inf, linewidth=7000
 )
 
-# pylint: disable=line-too-long
-# pylint: disable=too-many-lines
-# pylint: disable=redefined-outer-name
-# pylint: disable=no-member
-# pylint: disable=invalid-name
-
 ################################################################################
 #                                                                              #
 #                        Definition of the force field                         #
 #                                                                              #
 ################################################################################
+
+# Constants are written in all capital letters and are placed on the global
+# scope so it is not necesary to pass their values as parameters in many functions
+
 
 # We start by defining a set of lists that have the internal coordinate type,
 # force constant, and equilibrium distances associate with each type of internal
@@ -99,21 +97,46 @@ for i in range(N_VDW_PARAMETERS):
 # functions, but for the sake of clarity were written in what I thought was the most
 # understandable way.
 
+# Initially the parsing of the mol2 file was done thinking of section separators.
+# That is the reason why the following functions are here instead of just the parser for
+# files without separators
+
 
 def read_mol2_file(mol2_file: str) -> list[str]:
-    """Read a mol2 file and returns the content as a list."""
+    """
+    Read a mol2 file and returns the content as a list.
 
+    Parameters
+    ----------
+    mol2_file : str
+        DESCRIPTION.
+
+    Returns
+    -------
+    list[str]
+        DESCRIPTION.
+
+    """
     with open(mol2_file, "r", encoding="utf-8") as file:
         content_list = file.readlines()
     return content_list
 
 
 def identify_sections(content_list: list) -> Vector:
-    """Identify the start of the sections of the mol2 file.
-
-    Useful to avoid iterations over the content list.
     """
+    Identify the start of the sections of the mol2 file.
 
+    Parameters
+    ----------
+    content_list : list[str]
+        Mol2 input file in list of strings.
+
+    Returns
+    -------
+    Vector
+        Vector with indexes of the section separators @<_>.
+
+    """
     markers = []
     for line, content in enumerate(content_list):
         if "@<" in content:
@@ -121,10 +144,23 @@ def identify_sections(content_list: list) -> Vector:
     return markers
 
 
-def get_atoms_section(content_list: list[str], markers: list[int]) -> Vector:
-    """Analyze the labels in the mol2 file to determine the section that
-    contains the atom information"""
+def get_atoms_section(content_list: Vector, markers: list[int]) -> Vector:
+    """
+    Analyze the labels in the mol2 file to determine the section that contains the atom information.
 
+    Parameters
+    ----------
+    content_list : list[str]
+        Mol2 input file in list of strings.
+    markers : Vector
+        Vector with indexes of the section separators @<_>.
+
+    Returns
+    -------
+    Vector
+        Returns a list with  the indexes of start and end of the atomic position section.
+
+    """
     starting_atoms = end_of_atoms = False
 
     for marker in markers:
@@ -150,14 +186,29 @@ def get_atoms_section(content_list: list[str], markers: list[int]) -> Vector:
 def get_coordinates(
     content_list: list[str], start_end_atoms: list[int]
 ) -> Matrix:
-    """Using the marker list, reads the content list and extracts the number
+    """
+    Extract the atomic cartesian coordinates.
+
+    Using the marker list, reads the content list and extracts the number
     of atoms, atom labels, coordinates as a matrix and coordinates as an array.
 
     The starting and ending of atoms was defined this way in case the sections
     were not in order. Special precautions could be taken to avoid problems
     with blank lines
-    """
 
+    Parameters
+    ----------
+    content_list : list[str]
+        Mol2 input file in list of strings.
+    start_end_atoms : list[int]
+        Indexes of start and end of the atomic position section.
+
+    Returns
+    -------
+    Matrix
+        DESCRIPTION.
+
+    """
     starting_atoms, end_of_atoms = start_end_atoms
 
     atoms = content_list[starting_atoms:end_of_atoms]
@@ -172,10 +223,22 @@ def get_coordinates(
 def get_labels(
     content_list: list[str], start_end_atoms: list[int]
 ) -> list[str]:
-    """Using the marker list, reads the content list and extracts the atom
-    labels
     """
+    Using the marker list, read the content list and extract the atom labels.
 
+    Parameters
+    ----------
+    content_list : list[str]
+        Mol2 input file in list of strings.
+    start_end_atoms : list[int]
+        Indexes of start and end of the atomic position section.
+
+    Returns
+    -------
+    list[str]
+        List with the atom labels.
+
+    """
     starting_atoms, end_of_atoms = start_end_atoms
 
     atoms = content_list[starting_atoms:end_of_atoms]
@@ -185,9 +248,21 @@ def get_labels(
     return ATOM_LABELS
 
 
-def read_unconventional_mol2(mol2_file: str) -> list:
-    """Read a mol2 file that doesn't have differenciated sections with @<_>."""
+def read_mol2_w_o_separators(mol2_file: str) -> list:
+    """
+    Read a mol2 file that doesn't have differenciated sections with @<_>.
 
+    Parameters
+    ----------
+    mol2_file : str
+        Input file path.
+
+    Returns
+    -------
+    list
+        Returns a list that contains [number_of_atoms, ATOM_LABELS, atom_coord_2d, CONNECTIVITY_MATRIX].
+
+    """
     ATOM_LABELS = []
     atom_coord_2d = []
 
@@ -214,8 +289,15 @@ def read_unconventional_mol2(mol2_file: str) -> list:
 
 
 def extend_labels() -> list[str]:
-    """Extend the labels to add an identifiying integer."""
+    """
+    Extend the labels to add an identifiying integer such as C4 or H14.
 
+    Returns
+    -------
+    list[str]
+        List of extended labels str.
+
+    """
     counter_labels = list(set(ATOM_LABELS))
     counter = np.zeros(len(counter_labels))
 
@@ -233,11 +315,26 @@ def extend_labels() -> list[str]:
 def get_CONNECTIVITY_MATRIX(
     content_list: list[str], markers: list[int]
 ) -> Matrix:
-    """Using the marker list and the number of atoms, reads the content list and extracts
-    the connectivity matrix. It will be a N_ATOMS by N_ATOMS diagonally symmetric matrix
-    that will have 0 or 1 depending on if two atoms are connected or not. It will be
-    useful later to define the internal coordinates."""
+    """
+    Generate the connectivity matrix.
 
+    Using the marker list and the number of atoms, reads the content list and extracts
+    the connectivity matrix. It is a N_ATOMS by N_ATOMS diagonally symmetric matrix
+    that with values 0 or 1 depending on if two atoms are connected or not.
+
+    Parameters
+    ----------
+    content_list : list[str]
+        Mol2 input file in list of strings.
+    markers : list[int]
+        Position of the markers that separate the mol2 file.
+
+    Returns
+    -------
+    Matrix
+        Returns the connectivity matrix.
+
+    """
     starting_connectivity = end_of_connectivity = False
     for marker in markers:
         if starting_connectivity:
@@ -274,8 +371,15 @@ def get_CONNECTIVITY_MATRIX(
 
 
 def get_BOND_LIST() -> Matrix:
-    """Builds the bond list using the connectivity matrix"""
+    """
+    Build the bond list using the connectivity matrix.
 
+    Returns
+    -------
+    Matrix
+        DESCRIPTION.
+
+    """
     N_ATOMS = len(CONNECTIVITY_MATRIX)
 
     BOND_LIST = []
@@ -288,11 +392,21 @@ def get_BOND_LIST() -> Matrix:
     return BOND_LIST
 
 
-def build_angles2(BOND_LIST) -> list:
-    """Builds the angle list by adding an atom to the end of the bonds
-    forwards and backwards. If the angle is new it is stored. If not,
-    discarded"""
+def build_angles(BOND_LIST) -> list[list[int, int, int]]:
+    """
+    Build the angle list.
 
+    This is done by adding an atom to the end of the bonds forwards and
+    backwards. If the angle is new it is stored. If not, discarded
+
+
+    Returns
+    -------
+    list[list[int, int, int]]
+        List that contains lists the indices of 3 atoms involved in an angle.
+
+
+    """
     ANGLE_LIST = []
     angle_raw_list = []  # placeholder list for bonds that can be repeated
 
@@ -316,11 +430,19 @@ def build_angles2(BOND_LIST) -> list:
     return ANGLE_LIST
 
 
-def build_dihedrals2(ANGLE_LIST) -> list:
-    """Builds the dihedral list by adding an atom to the end of the angles
-    forwards and backwards. If the dihedral is new it is stored. If not,
-    discarded"""
+def build_dihedrals(ANGLE_LIST) -> list[list[int, int, int, int]]:
+    """
+    Build the dihedral list.
 
+    It os dpone by adding an atom to the end of the angles forwards and
+    backwards. If the dihedral is new it is stored. If not, discarded
+
+    Returns
+    -------
+    list[list[int, int, int, int]]
+        List that contains lists the indices of 4 atoms involved in a dihedral.
+
+    """
     dihedral_raw_list = []
     DIHEDRAL_LIST = []
 
@@ -351,9 +473,20 @@ def build_dihedrals2(ANGLE_LIST) -> list:
 
 
 def calculate_r_vector_matrix(atom_coord_2d: Matrix) -> Matrix:
-    """Calculates all interatomic vectors. Will be used to calculate
-    distances, angles and dihedrals."""
+    """
+    Calculate all interatomic vectors.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+
+    Returns
+    -------
+    Matrix
+        Returns a tensor with the values of the distance between atoms..
+
+    """
     N_ATOMS = len(atom_coord_2d)
     r_vector_matrix = []
 
@@ -367,9 +500,20 @@ def calculate_r_vector_matrix(atom_coord_2d: Matrix) -> Matrix:
 
 
 def calculate_dist_mat(r_vector_matrix: Matrix) -> Matrix:
-    """Calculates all distances between atoms. Will be used to calculate
-    bond energies and VdW energies."""
+    """
+    Calculate all distances between atoms.
 
+    Parameters
+    ----------
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+
+    Returns
+    -------
+    Matrix
+        Returns a matrix with the values of the distance between atoms.
+
+    """
     N_ATOMS = len(r_vector_matrix)
     dist_mat = np.zeros([N_ATOMS, N_ATOMS])
 
@@ -383,11 +527,26 @@ def calculate_dist_mat(r_vector_matrix: Matrix) -> Matrix:
 
 
 def calculate_angles(
-    r_vector_matrix: Matrix, dist_mat: Matrix, radians=False
+    r_vector_matrix: Matrix, dist_mat: Matrix, radians: bool = False
 ) -> Vector:
-    """Calculates the angles using
-    theta = arccos((r_ba · r_bc)/(||r_ba||*||r_bc||)) * 180/pi"""
+    """
+    Calculate the angles using theta = arccos((r_ba · r_bc)/(||r_ba||*||r_bc||)) * 180/pi.
 
+    Parameters
+    ----------
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    dist_mat : Matrix
+        Distance matrix between atoms.
+    radians : bool, optional
+        Choose if the angle values are in radians or degrees. The default is False.
+
+    Returns
+    -------
+    Vector
+        Returns a vector with the angle values.
+
+    """
     angle_values = []
 
     if radians:
@@ -410,9 +569,25 @@ def calculate_angles(
     return np.array(angle_values)
 
 
-def calculate_dihedrals(r_vector_matrix: Matrix, radians=False) -> Vector:
-    """Calculates the dihedral angles with the atan(sin_phi, cos_phi) formula"""
+def calculate_dihedrals(
+    r_vector_matrix: Matrix, radians: bool = False
+) -> Vector:
+    """
+    Calculate the dihedral angles with the atan(sin_phi, cos_phi) formula
 
+    Parameters
+    ----------
+    r_vector_matrix : Matrix
+        Vector matrix between atoms.
+    radians : bool, optional
+        Choose if the angle values are in radians or degrees. The default is False.
+
+    Returns
+    -------
+    Vector
+        Returns a vector with the dihedral values.
+
+    """
     dih_val = []
 
     if radians:
@@ -441,10 +616,18 @@ def calculate_dihedrals(r_vector_matrix: Matrix, radians=False) -> Vector:
 
 
 def identify_internals() -> list[list[int], list[int]]:
-    """This function identifies all the internal coordinate types, generating
-    two lists with integers that correspond to the index for the equilibrium
-    constants and values"""
+    """
+    Identify all the internal coordinate types.
 
+    Generate two lists with integers that correspond to the index for the
+    force constant list and equilibrium values list.
+
+    Returns
+    -------
+    (list[list[int], list[int]])
+        DESCRIPTION.
+
+    """
     BOND_TYPES = []
     ANGLE_TYPES = []
     for bond in BOND_LIST:
@@ -479,19 +662,27 @@ def identify_internals() -> list[list[int], list[int]]:
 
 
 def calculate_internal_values(atom_coord_2d: Matrix) -> Vector:
-    """Calculates the value of each of the internal coordinates from the
-    cartesian coordinates
     """
+    Calculate the value of each of the internal coordinates from the cartesian coordinates.
 
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+
+    Returns
+    -------
+    Vector
+        Vector containing the value of all the internal coodinate members at this cartesian coordinate positions.
+
+    """
     r_vector_matrix = calculate_r_vector_matrix(atom_coord_2d)
     dist_mat = calculate_dist_mat(r_vector_matrix)
 
     bonds = np.array([dist_mat[i][j] for i, j in BOND_LIST])
 
     angles = calculate_angles(r_vector_matrix, dist_mat, radians=True)
-    dihedrals = -np.array(
-        calculate_dihedrals(r_vector_matrix, radians=True)
-    )  # ???
+    dihedrals = -np.array(calculate_dihedrals(r_vector_matrix, radians=True))
 
     bonds_and_angles = np.append(bonds, angles)
     internals = np.append(bonds_and_angles, dihedrals)
@@ -509,8 +700,20 @@ def calculate_internal_values(atom_coord_2d: Matrix) -> Vector:
 
 
 def calculate_bond_potential(dist_mat: Matrix) -> Vector:
-    """Calculate bond potential due using the harmonic oscillator formula."""
+    """
+    Calculate bond potential due using the harmonic oscillator formula.
 
+    Parameters
+    ----------
+    dist_mat : Matrix
+        Distance matrix between atoms.
+
+    Returns
+    -------
+    Vector
+        Vector containing the bond potentials.
+
+    """
     bond_energies = []
 
     for index, bond in enumerate(BOND_LIST):
@@ -527,8 +730,20 @@ def calculate_bond_potential(dist_mat: Matrix) -> Vector:
 
 
 def calculate_angle_potential(angle_values: Vector) -> Vector:
-    """Calculate angle potential due using the harmonic oscillator formula."""
+    """
+    Calculate angle potential due using the harmonic oscillator formula.
 
+    Parameters
+    ----------
+    angle_values : Vector
+        Vector containing the values of the angles.
+
+    Returns
+    -------
+    Vector
+        Vector containing the angle pontials.
+
+    """
     angle_energies = []
 
     for angle, angle_value in enumerate(angle_values):
@@ -546,13 +761,24 @@ def calculate_angle_potential(angle_values: Vector) -> Vector:
 
 
 def calculate_dihedral_potential(dih_val: Vector) -> Vector:
-    """Calculates the dihedral energies using the formula A_phi(1+cos(n·phi)).
+    """
+    Calculates the dihedral energies using the formula A_phi(1+cos(n·phi)).
 
     WARNING the index of the force constant for the dihedral is manually
     placed. Any change to the order of the force constants list will need
-    manual adjusting of the index
-    """
+    manual adjusting of the index.
 
+    Parameters
+    ----------
+    dih_val : Vector
+        Vector that contains the floating point values of the different dihedrals.
+
+    Returns
+    -------
+    Vector
+        Vector containing the dihedral angle pontials.
+
+    """
     dihedral_energies = []
     for dihedral in range(len(DIHEDRAL_LIST)):
         dihedral_value = dih_val[dihedral]
@@ -569,8 +795,20 @@ def calculate_dihedral_potential(dih_val: Vector) -> Vector:
 
 
 def calculate_vdw_potential_matrix(dist_mat: Matrix) -> Matrix:
-    """Calculate individual pair VdW energies."""
+    """
+    Calculate individual pair VdW energies.
 
+    Parameters
+    ----------
+    dist_mat : Matrix
+        Distance matrix between atoms.
+
+    Returns
+    -------
+    Matrix
+        Matrix containing the VdW potential between pairs of atoms.
+
+    """
     N_ATOMS = len(dist_mat)
     vdw_potential_matrix = np.zeros([N_ATOMS, N_ATOMS])
 
@@ -579,7 +817,7 @@ def calculate_vdw_potential_matrix(dist_mat: Matrix) -> Matrix:
 
             i_lj_index = list(WDW_ATOM_LABELS).index(ATOM_LABELS[i])
             j_lj_index = list(WDW_ATOM_LABELS).index(ATOM_LABELS[j])
-            # sumar los vectores [i,;] y [:,j] y si el maximo es 2 entonces que no se meta
+            # sum of rows of connectivity matrix will have max=2 if connected to the same atom
             if max(CONNECTIVITY_MATRIX[i] + CONNECTIVITY_MATRIX[j]) == 2:
                 pass
             elif CONNECTIVITY_MATRIX[i][j] == 0:
@@ -591,8 +829,20 @@ def calculate_vdw_potential_matrix(dist_mat: Matrix) -> Matrix:
 
 
 def calculate_vdw_potential(vdw_potential_matrix: Matrix) -> float:
-    """Sum total VdW energies to obtain the total potential."""
+    """
+    Sum total VdW energies to obtain the total potential.
 
+    Parameters
+    ----------
+    vdw_potential_matrix : Matrix
+        Matrix containing the VdW potential between pairs of atoms.
+
+    Returns
+    -------
+    float
+        Total VdW potential.
+
+    """
     N_ATOMS = len(vdw_potential_matrix)
     vdw_potential = 0
 
@@ -604,13 +854,31 @@ def calculate_vdw_potential(vdw_potential_matrix: Matrix) -> float:
 
 
 def calculate_total_potential(
-    bond_energies: Matrix,
-    angle_energies: Matrix,
-    dihedral_energies: Matrix,
+    bond_energies: Vector,
+    angle_energies: Vector,
+    dihedral_energies: Vector,
     vdw_potential: float,
 ) -> float:
-    """Calculates the potential using all the potential contributions."""
+    """
+    Calculate the potential using all the potential contributions.
 
+    Parameters
+    ----------
+    bond_energies : Vector
+        Vector containing the bond potentials.
+    angle_energies : Vector
+        Vector containing the angle potentials.
+    dihedral_energies : Vector
+        Vector containing the dihedral angle pontials.
+    vdw_potential : float
+        VdW potential energy.
+
+    Returns
+    -------
+    float
+        DESCRIPTION.
+
+    """
     return (
         sum(bond_energies)
         + sum(angle_energies)
@@ -620,9 +888,20 @@ def calculate_total_potential(
 
 
 def calculate_potential_from_coords(atom_coord_2d: Matrix) -> float:
-    """Computes the total potential of the system from atom positions"""
+    """
+    Compute the total potential of the system from atom positions.
 
-    # calculate some variables for the calculate and print functions
+    Parameters
+    ----------
+    atom_coord_2d : Matrix
+        Matrix with the atom positions.
+
+    Returns
+    -------
+    float
+        Returns the total potential energy value at the given structure.
+
+    """
     r_vector_matrix = calculate_r_vector_matrix(atom_coord_2d)
     dist_mat = calculate_dist_mat(r_vector_matrix)
 
@@ -2135,7 +2414,7 @@ def regular_format(mol2_file: str) -> bool:
     Parameters
     ----------
     mol2_file : str
-        DESCRIPTION.
+        Input file path.
 
     Returns
     -------
@@ -2181,7 +2460,7 @@ def startup(mol2_file: str) -> list[int, list[str], Vector, Matrix]:
             CONNECTIVITY_MATRIX,
         ]
 
-    return read_unconventional_mol2(mol2_file)
+    return read_mol2_w_o_separators(mol2_file)
 
 
 def define_constants(mol2_file: str):
@@ -2208,8 +2487,8 @@ def define_constants(mol2_file: str):
     # print the system information
 
     BOND_LIST = get_BOND_LIST()
-    ANGLE_LIST = build_angles2(BOND_LIST)
-    DIHEDRAL_LIST = build_dihedrals2(ANGLE_LIST)
+    ANGLE_LIST = build_angles(BOND_LIST)
+    DIHEDRAL_LIST = build_dihedrals(ANGLE_LIST)
     BOND_TYPES, ANGLE_TYPES = identify_internals()
     UN = [ANGLE_LIST, DIHEDRAL_LIST]
 
